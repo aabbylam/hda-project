@@ -1,0 +1,10 @@
+# Ignore data and output
+*.csv
+*.xlsx
+*.npy
+*.pkl
+*.docx
+*.xls
+*.xlsm
+data/
+Protocol and data framework/
