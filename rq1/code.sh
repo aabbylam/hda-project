@@ -1,5 +1,5 @@
-#PBS -l walltime=20:00:00
-#PBS -l select=1:ncpus=12:mem=200gb
+#PBS -l walltime=24:00:00
+#PBS -l select=1:ncpus=20:mem=400gb
 #PBS -N multiclass_hyperparam_pls_cpu
 
 

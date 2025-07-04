@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 eq5d=pd.read_csv('rq1_cleaned_no_ae.csv')
 scores=pd.read_excel('../data/Scores 6 Jan 2025_Prescribed_Completed Baseline PROMs.xlsx')
@@ -56,11 +57,11 @@ rf = RandomForestRegressor(random_state=42)
 
 
 param_grid = {
-    'rf__n_estimators': [100, 500, 1000, 2000],
-    'rf__max_depth': [None, 5, 10, 20, 50],
+    'rf__n_estimators': [100, 500, 1000],
+    'rf__max_depth': [None, 5, 10, 20],
     'rf__min_samples_split': [2, 5, 10],
-    'rf__min_samples_leaf': [1, 2, 4, 8],
-    'rf__max_features': ['auto', 'sqrt', 0.2, 0.5],
+    'rf__min_samples_leaf': [1, 2, 4],
+    'rf__max_features': ['sqrt', 'log2', 0.5, None],
     'rf__bootstrap': [True, False]
 }
 
@@ -77,8 +78,8 @@ grid = GridSearchCV(
     param_grid=param_grid,
     cv=cv,
     scoring='neg_mean_squared_error',  
-    n_jobs=-1,
-    verbose=3,
+    n_jobs=4,
+    verbose=2,
     return_train_score=True
 )
 
