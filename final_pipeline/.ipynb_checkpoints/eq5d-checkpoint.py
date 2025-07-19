@@ -9,6 +9,7 @@ from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from sklearn.neural_network import MLPRegressor
 
 OUTPUT_DIR = 'results'
 if not os.path.exists(OUTPUT_DIR):
@@ -38,13 +39,20 @@ def get_models_and_grids():
         'Ridge': Ridge(random_state=0),
         'Lasso': Lasso(random_state=0),
         'RandomForest': RandomForestRegressor(random_state=42),
-        'XGB': XGBRegressor(objective='reg:squarederror', random_state=42)
+        'XGB': XGBRegressor(objective='reg:squarederror', random_state=42),
+        'MLP':MLPRegressor(random_state=42, max_iter=1000, early_stopping=True, validation_fraction=0.1, n_iter_no_change=10)
     }
     grids = {
-        'Ridge': {'alpha': [0.1, 1.0, 10.0]},
-        'Lasso': {'alpha': [0.01, 0.1, 1.0]},
-        'RandomForest': {'n_estimators': [100, 200], 'max_depth': [None, 5, 10]},
-        'XGB': {'n_estimators': [100, 200], 'max_depth': [3, 6], 'learning_rate': [0.01, 0.1]}
+        'Ridge': {'alpha': [0.01, 0.1, 1, 10, 100]},
+        'Lasso': {'alpha': [0.001, 0.01, 0.1, 1, 10]},
+        'RandomForest': {'n_estimators': [100, 200, 500 ], 'max_depth': [None, 5, 10, 20],
+        'min_samples_split':[2,5,10]},
+        'XGB': {'n_estimators': [100, 200, 500], 'max_depth': [2,4,8], 'learning_rate': [0.001,0.01, 0.1]},
+        'MLP':{
+            'hidden_layer_sizes':[(50,), (100,), (50,50)],
+            'alpha':[1e-4, 1e-3, 1e-2],
+            'learning_rate_init':[1e-4, 1e-3, 1e-2]}
+        
     }
     return models, grids
 
