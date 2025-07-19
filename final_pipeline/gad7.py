@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-name = 'eq5d_round2'
+name = 'gad7_round2'
 eq5d=pd.read_csv('../rq1/rq1_cleaned_no_ae.csv')
 
 
@@ -58,11 +58,11 @@ X = full.drop(columns=[
  'insomniaEfficacyMeasure_Round12',
  'insomniaEfficacyMeasure_Round13'
 ])
-y = full['EQ5D_Round2']
+y = full['GAD7_Round2']
 
 data = pd.concat([X, y], axis=1).dropna()
-X = data.drop(columns='EQ5D_Round2')
-y = data['EQ5D_Round2']
+X = data.drop(columns='GAD7_Round2')
+y = data['GAD7_Round2']
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
@@ -176,4 +176,4 @@ results_df = pd.DataFrame.from_dict(ensemble_results, orient='index')
 results_df.index.name = 'Model'
 results_df.reset_index(inplace=True)
 
-results_df.to_csv(f'{name}.csv', index=False)
+results_df.to_csv(f'/rds/general/user/hsl121/home/hda_project/final_pipeline/results/{name}.csv', index=False)
