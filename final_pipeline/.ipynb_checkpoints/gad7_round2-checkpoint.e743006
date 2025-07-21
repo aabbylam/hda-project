@@ -7,7 +7,7 @@ If these failures are not expected, you can try to debug them by setting error_s
 
 Below are more details about the failures:
 --------------------------------------------------------------------------------
-333 fits failed with the following error:
+375 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -24,7 +24,7 @@ Traceback (most recent call last):
 sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
 
 --------------------------------------------------------------------------------
-207 fits failed with the following error:
+165 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -105,24 +105,7 @@ If these failures are not expected, you can try to debug them by setting error_s
 
 Below are more details about the failures:
 --------------------------------------------------------------------------------
-199 fits failed with the following error:
-Traceback (most recent call last):
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
-    estimator.fit(X_train, y_train, **fit_params)
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
-    return fit_method(estimator, *args, **kwargs)
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
-    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
-    estimator._validate_params()
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
-    validate_parameter_constraints(
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
-
---------------------------------------------------------------------------------
-341 fits failed with the following error:
+338 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -137,6 +120,23 @@ Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
     raise InvalidParameterError(
 sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+202 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
 
   warnings.warn(some_fits_failed_message, FitFailedWarning)
 /rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
@@ -194,6 +194,8 @@ sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parame
  0.28285234 0.28354866 0.2859092  0.28160634 0.28286838 0.28462903
  0.28160634 0.28286838 0.28462903 0.28275248 0.28315735 0.28404041]
   warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
 /rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
 540 fits failed out of a total of 1620.
 The score on these train-test partitions for these parameters will be set to nan.
@@ -201,24 +203,7 @@ If these failures are not expected, you can try to debug them by setting error_s
 
 Below are more details about the failures:
 --------------------------------------------------------------------------------
-359 fits failed with the following error:
-Traceback (most recent call last):
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
-    estimator.fit(X_train, y_train, **fit_params)
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
-    return fit_method(estimator, *args, **kwargs)
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
-    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
-    estimator._validate_params()
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
-    validate_parameter_constraints(
-  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
-    raise InvalidParameterError(
-sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
-
---------------------------------------------------------------------------------
-181 fits failed with the following error:
+186 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -233,6 +218,23 @@ Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
     raise InvalidParameterError(
 sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+354 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
 
   warnings.warn(some_fits_failed_message, FitFailedWarning)
 /rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
@@ -290,8 +292,6 @@ sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parame
  0.27980022 0.28162669 0.28344284 0.27894052 0.28002904 0.28189289
  0.27894052 0.28002904 0.28189289 0.27978734 0.27990916 0.28174458]
   warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
 /rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
 540 fits failed out of a total of 1620.
 The score on these train-test partitions for these parameters will be set to nan.
@@ -299,7 +299,7 @@ If these failures are not expected, you can try to debug them by setting error_s
 
 Below are more details about the failures:
 --------------------------------------------------------------------------------
-418 fits failed with the following error:
+290 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -316,7 +316,7 @@ Traceback (most recent call last):
 sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
 
 --------------------------------------------------------------------------------
-122 fits failed with the following error:
+250 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -397,7 +397,7 @@ If these failures are not expected, you can try to debug them by setting error_s
 
 Below are more details about the failures:
 --------------------------------------------------------------------------------
-304 fits failed with the following error:
+68 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -414,7 +414,7 @@ Traceback (most recent call last):
 sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
 
 --------------------------------------------------------------------------------
-236 fits failed with the following error:
+472 fits failed with the following error:
 Traceback (most recent call last):
   File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
     estimator.fit(X_train, y_train, **fit_params)
@@ -486,13 +486,77 @@ sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parame
  0.27905142 0.27932858 0.28039305 0.27486845 0.27678818 0.27850117
  0.27486845 0.27678818 0.27850117 0.27543614 0.27692838 0.27766053]
   warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
-/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/hda_project/final_pipeline/gad7.py", line 111, in <module>
+    gs.fit(X.iloc[tr_idx], y.iloc[tr_idx])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py", line 1024, in fit
+    self._run_search(evaluate_candidates)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py", line 1571, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py", line 1001, in evaluate_candidates
+    _warn_or_raise_about_fit_failures(out, self.error_score)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 517, in _warn_or_raise_about_fit_failures
+    raise ValueError(all_fits_failed_message)
+ValueError: 
+All the 2160 fits failed.
+It is very likely that your model is misconfigured.
+You can try to debug the error by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+2160 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/sklearn.py", line 1143, in fit
+    train_dmatrix, evals = _wrap_evaluation_matrices(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/sklearn.py", line 603, in _wrap_evaluation_matrices
+    train_dmatrix = create_dmatrix(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/sklearn.py", line 1065, in _create_dmatrix
+    return QuantileDMatrix(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 1573, in __init__
+    self._init(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 1632, in _init
+    it.reraise()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 569, in reraise
+    raise exc  # pylint: disable=raising-bad-type
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 550, in _handle_exception
+    return fn()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 637, in <lambda>
+    return self._handle_exception(lambda: self.next(input_data), 0)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 1402, in next
+    input_data(**self.kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 626, in input_data
+    self.proxy.set_info(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 726, in inner_f
+    return func(**kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 954, in set_info
+    self.set_label(label)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/core.py", line 1092, in set_label
+    dispatch_meta_backend(self, label, "label", "float")
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 1345, in dispatch_meta_backend
+    _meta_from_pandas_df(data, name, dtype=dtype, handle=handle)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 621, in _meta_from_pandas_df
+    data, _, _ = _transform_pandas_df(data, False, meta=name)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 611, in _transform_pandas_df
+    arrays = pandas_transform_data(data)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 550, in pandas_transform_data
+    result.append(oth_type(data[col]))
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/xgboost/data.py", line 515, in oth_type
+    ser.dtype,
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/pandas/core/generic.py", line 6299, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'DataFrame' object has no attribute 'dtype'
+
