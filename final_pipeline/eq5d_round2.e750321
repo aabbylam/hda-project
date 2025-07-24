@@ -1,0 +1,498 @@
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+540 fits failed out of a total of 1620.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+337 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+203 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.4043095  0.40801889 0.41125874
+ 0.4072334  0.40979964 0.41083626 0.40704364 0.41039436 0.41146496
+ 0.4058744  0.40864192 0.41032809 0.40328795 0.40656518 0.40964962
+ 0.40653408 0.40864623 0.40996026 0.40528621 0.40682198 0.40754037
+ 0.40528621 0.40682198 0.40754037 0.40395048 0.40609683 0.40751277
+ 0.37882445 0.38073705 0.38363633 0.38107321 0.38096464 0.38316205
+ 0.38157069 0.38184169 0.38133276 0.37719107 0.37760663 0.37880928
+ 0.37835309 0.37901753 0.37957619 0.37627724 0.37621437 0.3765502
+ 0.37105824 0.37045678 0.37080731 0.37105824 0.37045678 0.37080731
+ 0.36972761 0.36863618 0.36896016        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.3020149  0.30315136 0.30354808 0.3018389  0.30299653 0.30376636
+ 0.30323309 0.3043682  0.30415679 0.30161469 0.30271903 0.30397244
+ 0.30165619 0.30301363 0.30400364 0.30184843 0.30363682 0.30418451
+ 0.30130456 0.3040637  0.30471146 0.30130456 0.3040637  0.30471146
+ 0.30198195 0.30450404 0.30486866 0.25718847 0.24985897 0.24656805
+ 0.2567364  0.24789581 0.24571668 0.25670645 0.24741646 0.24543348
+ 0.25564199 0.24810613 0.24552534 0.25733001 0.24843668 0.24566899
+ 0.25670739 0.24767336 0.24552212 0.25506635 0.24728386 0.24525832
+ 0.25506635 0.24728386 0.24525832 0.25666605 0.24777835 0.24595751
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.38039012 0.38196928 0.38313491
+ 0.3817959  0.38329481 0.38479373 0.38134134 0.38336071 0.3841683
+ 0.38117142 0.38323151 0.38504937 0.38352408 0.38481133 0.38509928
+ 0.3805617  0.38351806 0.38437681 0.38426659 0.38367208 0.38448285
+ 0.38426659 0.38367208 0.38448285 0.38186247 0.38341111 0.38393661
+ 0.34002928 0.33536122 0.33553484 0.34215372 0.338353   0.3357874
+ 0.33771828 0.33376956 0.3335076  0.340048   0.33557734 0.33465397
+ 0.33460052 0.33409594 0.33461816 0.33655661 0.33345945 0.33393484
+ 0.33736858 0.33557266 0.33378854 0.33736858 0.33557266 0.33378854
+ 0.33987049 0.3363938  0.33326931        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.40463032 0.40839794 0.41004468 0.40627726 0.40988791 0.41090916
+ 0.40746664 0.40873206 0.411186   0.40472547 0.4081338  0.41017745
+ 0.40620251 0.40847427 0.41009666 0.40652985 0.40786904 0.4090607
+ 0.40212352 0.40403908 0.40634655 0.40212352 0.40403908 0.40634655
+ 0.40220977 0.40500005 0.40719763 0.37957894 0.38015829 0.38137925
+ 0.3797721  0.38043095 0.3810948  0.38034174 0.37986059 0.37964552
+ 0.37667487 0.3766216  0.37720114 0.37778544 0.37669864 0.37776789
+ 0.37583116 0.37496762 0.37479917 0.37166679 0.37069979 0.36969201
+ 0.37166679 0.37069979 0.36969201 0.37359491 0.36932132 0.36908901]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+540 fits failed out of a total of 1620.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+432 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+108 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.40604022 0.40835137 0.41145154
+ 0.40749532 0.41045936 0.41180331 0.4081658  0.41065257 0.41164695
+ 0.40592367 0.40799229 0.40958212 0.40546284 0.40795204 0.41074737
+ 0.40450368 0.40710546 0.40939234 0.40134101 0.4046076  0.40720422
+ 0.40134101 0.4046076  0.40720422 0.40327753 0.40460016 0.40627544
+ 0.38083056 0.38215777 0.38202302 0.380169   0.38082728 0.38111204
+ 0.37745827 0.37756724 0.3789879  0.37556118 0.37548861 0.37661608
+ 0.37795645 0.37661729 0.37715134 0.37650608 0.3757085  0.3752882
+ 0.37084025 0.37005772 0.36990659 0.37084025 0.37005772 0.36990659
+ 0.36974688 0.36801621 0.36823266        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.30506023 0.30246    0.30379889 0.30615801 0.30280191 0.3040936
+ 0.30654123 0.30250461 0.30397289 0.30688699 0.3031384  0.30420587
+ 0.30667536 0.30340703 0.30460796 0.30658489 0.30295566 0.30434603
+ 0.30631656 0.30272254 0.3041139  0.30631656 0.30272254 0.3041139
+ 0.3049702  0.30165329 0.30339553 0.25812667 0.2469675  0.24389305
+ 0.25779058 0.2472806  0.24434782 0.25359245 0.24397561 0.24289349
+ 0.25639516 0.24622416 0.2453148  0.25757165 0.24677441 0.24466203
+ 0.25379871 0.24402152 0.24306476 0.25373178 0.24326094 0.24388215
+ 0.25373178 0.24326094 0.24388215 0.25438481 0.24350986 0.24352208
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.38102258 0.3814398  0.38386894
+ 0.38264708 0.38405596 0.38470493 0.38388739 0.38410711 0.38472949
+ 0.38359994 0.38331438 0.38411913 0.38171188 0.38306148 0.38419896
+ 0.38494785 0.38463925 0.38417109 0.38197364 0.38215388 0.38293976
+ 0.38197364 0.38215388 0.38293976 0.38205895 0.38339076 0.38437781
+ 0.334116   0.33180711 0.33158039 0.33451942 0.3321302  0.33206502
+ 0.33691965 0.33153144 0.33152121 0.33570154 0.33273465 0.33103779
+ 0.33538913 0.33226746 0.33084508 0.33439613 0.33142534 0.33193512
+ 0.33370428 0.33093374 0.33034595 0.33370428 0.33093374 0.33034595
+ 0.33646889 0.33189214 0.33098766        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.40614482 0.40889976 0.41032318 0.40620146 0.40906768 0.41173268
+ 0.40832874 0.40941263 0.41093285 0.40382207 0.4059964  0.40933337
+ 0.40517506 0.40843811 0.41015009 0.40560214 0.40828868 0.40920724
+ 0.40301338 0.4045739  0.40638581 0.40301338 0.4045739  0.40638581
+ 0.40332892 0.40441906 0.40634443 0.37741337 0.3778369  0.37891826
+ 0.37559117 0.37729514 0.37824801 0.37582485 0.3764596  0.37801461
+ 0.3716937  0.3723874  0.37374687 0.37353567 0.37469193 0.37538846
+ 0.37209586 0.37182353 0.37291216 0.36861193 0.36757742 0.36776433
+ 0.36861193 0.36757742 0.36776433 0.36862477 0.36698974 0.36632437]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+540 fits failed out of a total of 1620.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+303 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+237 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.41451838 0.41745967 0.42017734
+ 0.41861886 0.42194632 0.4222348  0.41572476 0.41934426 0.42102011
+ 0.4173854  0.42006727 0.42096327 0.41536452 0.41831364 0.42007485
+ 0.41711341 0.42003169 0.42089101 0.4148333  0.41577302 0.41729275
+ 0.4148333  0.41577302 0.41729275 0.41522127 0.41660506 0.41731494
+ 0.38787837 0.39063404 0.39243382 0.39108463 0.39237255 0.39314543
+ 0.39205979 0.39158369 0.39151933 0.3881149  0.38801849 0.38848879
+ 0.38651226 0.38636796 0.38685837 0.38833512 0.38552355 0.38594481
+ 0.37971013 0.37799567 0.37817109 0.37971013 0.37799567 0.37817109
+ 0.38116257 0.37830931 0.37945749        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.31389804 0.31407451 0.3142843  0.31274897 0.31239091 0.31352784
+ 0.31178108 0.31187082 0.31308633 0.31275915 0.31311876 0.31349219
+ 0.31265514 0.31298279 0.31360474 0.31137112 0.31217201 0.31314019
+ 0.3120048  0.31289399 0.31315727 0.3120048  0.31289399 0.31315727
+ 0.31164113 0.31267606 0.31315286 0.26021636 0.25240303 0.25200177
+ 0.25963733 0.25204642 0.25113194 0.25900304 0.25321965 0.25217473
+ 0.26161169 0.25324644 0.25281283 0.26006822 0.25172284 0.25157553
+ 0.25991706 0.2533204  0.25265729 0.2586353  0.25080032 0.25189908
+ 0.2586353  0.25080032 0.25189908 0.25918635 0.25152257 0.2525544
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.39328897 0.39553331 0.39546121
+ 0.39276313 0.39417321 0.39449407 0.39194503 0.39469868 0.3955458
+ 0.39106866 0.39389975 0.39409763 0.39245388 0.39395635 0.39433761
+ 0.39140025 0.3959921  0.39635613 0.39139425 0.3935201  0.3937874
+ 0.39139425 0.3935201  0.3937874  0.39466556 0.39378059 0.39431909
+ 0.34674885 0.34336833 0.34237556 0.34820036 0.3430852  0.34289916
+ 0.34993629 0.34373981 0.34290641 0.34806937 0.34425183 0.3433965
+ 0.34747184 0.3431853  0.34254871 0.34812485 0.34531701 0.34292316
+ 0.34595516 0.34277068 0.34158734 0.34595516 0.34277068 0.34158734
+ 0.34578999 0.34256915 0.34195769        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.41804258 0.42030834 0.42118288 0.41497152 0.41909668 0.42067007
+ 0.41823074 0.42016739 0.42110241 0.41484974 0.41885425 0.42043287
+ 0.41736111 0.42005438 0.42092278 0.41649004 0.41929095 0.42051002
+ 0.4140254  0.41506905 0.41639841 0.4140254  0.41506905 0.41639841
+ 0.41526949 0.41669247 0.41717676 0.3887271  0.38857445 0.39040649
+ 0.38881205 0.38890032 0.38980581 0.38940768 0.38879804 0.38902116
+ 0.38686942 0.38600692 0.38603775 0.38522694 0.3851384  0.38539209
+ 0.38308481 0.38288885 0.38351657 0.3790516  0.37705252 0.37694799
+ 0.3790516  0.37705252 0.37694799 0.37944727 0.37816531 0.37815881]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+540 fits failed out of a total of 1620.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+299 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+241 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.41205666 0.41511837 0.41716794
+ 0.411441   0.41400344 0.41674838 0.41304221 0.41495979 0.41639944
+ 0.41026739 0.4138895  0.41625612 0.4096625  0.41207694 0.41534935
+ 0.41151792 0.41322139 0.41510524 0.40690403 0.40975609 0.41201743
+ 0.40690403 0.40975609 0.41201743 0.40958328 0.41096857 0.41276079
+ 0.38540621 0.38797707 0.38838162 0.38703724 0.38670929 0.38785474
+ 0.38814369 0.38721606 0.38731993 0.38308884 0.38364    0.38448877
+ 0.38215325 0.38275145 0.38354689 0.38279328 0.38182516 0.38193127
+ 0.37618519 0.37497122 0.37473999 0.37618519 0.37497122 0.37473999
+ 0.37600764 0.37403712 0.37426166        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.30259158 0.30478014 0.30873644 0.30347297 0.30596935 0.30896228
+ 0.30337726 0.30600755 0.30935519 0.30342115 0.30566764 0.30889989
+ 0.30347097 0.30623164 0.3091469  0.30284265 0.30553495 0.30897708
+ 0.30344807 0.30548985 0.30881344 0.30344807 0.30548985 0.30881344
+ 0.30216434 0.30534903 0.30901359 0.25771565 0.24887831 0.24893271
+ 0.25967279 0.2495757  0.24986661 0.25942065 0.24899021 0.24954529
+ 0.25927262 0.25042705 0.25043451 0.25907886 0.24971653 0.25037383
+ 0.25875378 0.24892501 0.25011483 0.257014   0.24817028 0.24944799
+ 0.257014   0.24817028 0.24944799 0.25880172 0.24926304 0.25021714
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.3860183  0.3867068  0.38978583
+ 0.38712578 0.38794189 0.38961721 0.38758265 0.38857123 0.38988625
+ 0.38711876 0.3877504  0.38981258 0.38653314 0.38793628 0.38994527
+ 0.38742454 0.38941787 0.39032203 0.38604448 0.38710992 0.38829417
+ 0.38604448 0.38710992 0.38829417 0.38675579 0.38764513 0.38851767
+ 0.3411274  0.33835397 0.33897213 0.34202284 0.33851207 0.33899797
+ 0.34366639 0.33929128 0.33860752 0.34023349 0.33855395 0.33835535
+ 0.34337409 0.33904158 0.33790434 0.34153294 0.33683198 0.33752219
+ 0.34185596 0.33832826 0.33676808 0.34185596 0.33832826 0.33676808
+ 0.34028306 0.33806646 0.33573626        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.41148828 0.41433085 0.41627526 0.4125142  0.41463914 0.41640464
+ 0.41119046 0.41386568 0.41556943 0.41335766 0.41325575 0.41533558
+ 0.41186774 0.41444834 0.41630446 0.41268337 0.41480298 0.41535951
+ 0.40926567 0.41158645 0.41279984 0.40926567 0.41158645 0.41279984
+ 0.40934658 0.41009708 0.41162561 0.38463013 0.38448377 0.38554308
+ 0.38431802 0.3845979  0.38526534 0.38567592 0.38463666 0.38412831
+ 0.38098063 0.38019569 0.38144686 0.38194908 0.38067714 0.38140844
+ 0.37825435 0.37877807 0.37934167 0.37306901 0.37371169 0.37383071
+ 0.37306901 0.37371169 0.37383071 0.37509548 0.37459619 0.37370347]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+540 fits failed out of a total of 1620.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+377 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+163 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1389, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/pipeline.py", line 662, in fit
+    self._final_estimator.fit(Xt, y, **last_step_params["fit"])
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestRegressor must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.41511423 0.41900899 0.42045416
+ 0.41850428 0.42078099 0.42170073 0.41550681 0.41882065 0.41982244
+ 0.41513254 0.41697646 0.41903283 0.41434209 0.41782425 0.418916
+ 0.41619742 0.41755251 0.41837798 0.4143283  0.41598679 0.41551388
+ 0.4143283  0.41598679 0.41551388 0.41361538 0.41504163 0.4155807
+ 0.38696166 0.39144662 0.39313869 0.39031707 0.39094672 0.39198691
+ 0.38992116 0.39043129 0.39078503 0.38740022 0.38724409 0.38827609
+ 0.38572327 0.38683072 0.38813969 0.38423954 0.38361409 0.38442491
+ 0.38043793 0.37989057 0.37890454 0.38043793 0.37989057 0.37890454
+ 0.37552816 0.37708518 0.37816105        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.31344741 0.31169297 0.31056143 0.31270657 0.3122813  0.31093631
+ 0.31209418 0.31115213 0.30993659 0.3136606  0.31232021 0.3105615
+ 0.31387382 0.31277138 0.31104288 0.31322559 0.31202298 0.3102213
+ 0.31290245 0.31171928 0.31012241 0.31290245 0.31171928 0.31012241
+ 0.3122435  0.31139492 0.31009406 0.25970331 0.25216424 0.25122596
+ 0.25757917 0.25096786 0.25069688 0.25805519 0.25124595 0.24988065
+ 0.25815006 0.25080345 0.25111999 0.25927584 0.25116674 0.25101879
+ 0.2593218  0.25129109 0.25045005 0.25886422 0.25007795 0.2490877
+ 0.25886422 0.25007795 0.2490877  0.25882541 0.25063935 0.24929742
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.38937029 0.3923133  0.39220165
+ 0.39016917 0.39318921 0.39289337 0.3890959  0.39161392 0.39193885
+ 0.39084371 0.391813   0.39209094 0.38897676 0.39003772 0.3914836
+ 0.39164096 0.39219858 0.39202027 0.39141468 0.39166061 0.39134236
+ 0.39141468 0.39166061 0.39134236 0.3902014  0.39031196 0.39068257
+ 0.34598532 0.34150959 0.3412264  0.34369401 0.33939327 0.34012911
+ 0.3415187  0.3389047  0.3408811  0.34768294 0.34338455 0.34170543
+ 0.34336099 0.34072593 0.34128764 0.34299736 0.3400032  0.33931193
+ 0.34446438 0.34049024 0.33969891 0.34446438 0.34049024 0.33969891
+ 0.34302433 0.34158207 0.33983733        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.4165415  0.41859375 0.41933705 0.41691108 0.41827381 0.41989144
+ 0.41751543 0.41928036 0.41988451 0.4156196  0.41851348 0.41922952
+ 0.41462142 0.41804948 0.41863721 0.41503325 0.41734457 0.41759595
+ 0.41302786 0.41459318 0.41531558 0.41302786 0.41459318 0.41531558
+ 0.41346102 0.4149962  0.41471778 0.38575761 0.38748431 0.38880043
+ 0.38882873 0.38952738 0.38925789 0.38483224 0.3857551  0.38608349
+ 0.38506223 0.3846777  0.38579251 0.38491446 0.38539607 0.38547265
+ 0.38208055 0.38194844 0.38298977 0.37772146 0.37623671 0.37630855
+ 0.37772146 0.37623671 0.37630855 0.37731464 0.37583853 0.37694074]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(

@@ -3,7 +3,7 @@
 #PBS -N gad7_round2
 
 
-cd /rds/general/user/hsl121/home/hda_project/final_pipeline
+cd /rds/general/user/hsl121/home/hda_project/hrqol_scores
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)"
 source activate TDS
