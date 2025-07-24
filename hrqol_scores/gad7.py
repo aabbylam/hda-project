@@ -13,9 +13,17 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPRegressor
 
+import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import joblib
+
+
 
 name = 'gad7_round2'
-results_dir = '/rds/general/user/hsl121/home/hda_project/final_pipeline/results'
+base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol/results'
+results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
 models_dir = os.path.join(results_dir, 'models')
 os.makedirs(fig_dir, exist_ok=True)
@@ -134,18 +142,38 @@ for model_name, pipe in models.items():
     final_pipe.fit(X, y)
     joblib.dump(final_pipe, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
-# 6a) Bar-chart of mean R² ± SD
-fig, ax = plt.subplots(figsize=(6,4))
-plot_df = results_df.sort_values('r2_mean')
-ax.barh(plot_df['Model'], plot_df['r2_mean'], xerr=plot_df['r2_std'],
-        align='center', ecolor='gray', capsize=4)
-ax.set_xlabel('Mean R² (± SD)')
-ax.set_title('Model Comparison')
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+
+metrics = []
+for model_name in models:
+    pipe_path = os.path.join(models_dir, f'{name}_{model_name}.pkl')
+    final_pipe = joblib.load(pipe_path)
+    preds      = final_pipe.predict(X_test)
+    metrics.append({
+        'Model': model_name,
+        'MAE':    mean_absolute_error(y_test, preds),
+        'MSE':    mean_squared_error(y_test, preds)
+    })
+
+metrics_df = pd.DataFrame(metrics)
+metrics_csv = os.path.join(fig_dir, f'{name}_model_metrics.csv')
+metrics_df.to_csv(metrics_csv, index=False)
+
+
+fig, ax = plt.subplots(figsize=(8,5))
+x, w = np.arange(len(metrics_df)), 0.35
+ax.bar(x - w/2, metrics_df['MAE'], w, label='MAE')
+ax.bar(x + w/2, metrics_df['MSE'], w, label='MSE')
+ax.set_xticks(x)
+ax.set_xticklabels(metrics_df['Model'], rotation=45, ha='right')
+ax.set_ylabel('Error')
+ax.set_title(f'{name}: MAE vs MSE by Model')
+ax.legend()
 plt.tight_layout()
-fig.savefig(os.path.join(fig_dir, f'{name}_model_comparison_r2.png'), dpi=300, bbox_inches='tight')
+fig.savefig(os.path.join(fig_dir, f'{name}_error_comparison.png'),
+            dpi=300, bbox_inches='tight')
 plt.close(fig)
 
-# --- 6b) Box‐plots of R² and MSE distributions across folds ---
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
 # Prepare DataFrames: fold_r2 and fold_mse are dicts of lists
