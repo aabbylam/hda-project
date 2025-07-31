@@ -8,9 +8,10 @@ from sklearn.model_selection import train_test_split, GridSearchCV, KFold
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
-from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.metrics import make_scorer, mean_squared_error, mean_absolute_error, r2_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import cross_val_score
 from sklearn.neural_network import MLPRegressor
 
 import os
