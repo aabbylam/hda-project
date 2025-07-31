@@ -21,7 +21,7 @@ import joblib
 
 
 
-name = 'eq5d_round4'
+name = 'eq5d_round2'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol_cv/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -58,14 +58,9 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
 ]
 X = full.drop(columns=drop_cols)
-y = full['EQ5D_Round4']
+y = full['EQ5D_Round2']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='EQ5D_Round4'), data['EQ5D_Round4']
-
-# Train/test split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+X, y = data.drop(columns='EQ5D_Round2'), data['EQ5D_Round2']
 
 # Define models and parameter grids
 def get_models_and_grids():
@@ -105,92 +100,85 @@ def get_models_and_grids():
 
     return models, grids
 
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+mse_scorer = make_scorer(mean_squared_error, greater_is_better=False)
+
 models, grids = get_models_and_grids()
+results = []
 
-# Nested CV to evaluate and select hyperparameters
-outer_cv = KFold(n_splits=5, shuffle=True, random_state=1)
-inner_cv = KFold(n_splits=5, shuffle=True, random_state=2)
-ensemble_results = {}
-fold_r2 = {m: [] for m in models}
-fold_mse = {m: [] for m in models}
+for model_name, model_pipeline in models.items():
+    grid = GridSearchCV(model_pipeline, grids[model_name], cv=cv, scoring=mse_scorer, n_jobs=-1, refit=True)
+    grid.fit(X, y)
 
-for model_name, pipe in models.items():
-    gs = GridSearchCV(pipe, grids[model_name], cv=inner_cv, scoring='r2', n_jobs=-1)
-    for tr_idx, te_idx in outer_cv.split(X):
-        gs.fit(X.iloc[tr_idx], y.iloc[tr_idx])
-        preds = gs.predict(X.iloc[te_idx])
-        fold_r2[model_name].append(r2_score(y.iloc[te_idx], preds))
-        fold_mse[model_name].append(mean_squared_error(y.iloc[te_idx], preds))
-    ensemble_results[model_name] = {
-        'best_params': gs.best_params_,
-        'r2_mean': np.mean(fold_r2[model_name]),
-        'r2_std': np.std(fold_r2[model_name]),
-        'mse_mean': np.mean(fold_mse[model_name]),
-        'mse_std': np.std(fold_mse[model_name])
-    }
+    best_model = grid.best_estimator_
 
-# Save results to CSV
-results_df = pd.DataFrame.from_dict(ensemble_results, orient='index')
-results_df.index.name = 'Model'
-results_df.reset_index(inplace=True)
-results_df.to_csv(os.path.join(results_dir, f'{name}_results.csv'), index=False)
+    # Cross-validated scores
+    neg_mse_scores = cross_val_score(best_model, X, y, cv=cv, scoring='neg_mean_squared_error')
+    mae_scores     = cross_val_score(best_model, X, y, cv=cv, scoring='neg_mean_absolute_error')
+    r2_scores      = cross_val_score(best_model, X, y, cv=cv, scoring='r2')
 
-# Re-fit each model on full data and save pipeline
-for model_name, pipe in models.items():
-    best_params = ensemble_results[model_name]['best_params']
-    final_pipe = pipe.set_params(**{f"model__{k.split('__')[-1]}": v for k, v in best_params.items()})
-    final_pipe.fit(X, y)
-    joblib.dump(final_pipe, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
+    # Convert negatives
+    mse_scores = -neg_mse_scores
+    rmse_scores = np.sqrt(mse_scores)
+    mae_scores = -mae_scores
 
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-
-metrics = []
-for model_name in models:
-    pipe_path = os.path.join(models_dir, f'{name}_{model_name}.pkl')
-    final_pipe = joblib.load(pipe_path)
-    preds      = final_pipe.predict(X_test)
-    metrics.append({
+    results.append({
         'Model': model_name,
-        'MAE':    mean_absolute_error(y_test, preds),
-        'MSE':    mean_squared_error(y_test, preds)
+        'Best Params': grid.best_params_,
+        'Mean MSE': round(np.mean(mse_scores), 5),
+        'Std Error MSE': round(np.std(mse_scores) / np.sqrt(len(mse_scores)), 5),
+        'Mean RMSE': round(np.mean(rmse_scores), 5),
+        'Std Error RMSE': round(np.std(rmse_scores) / np.sqrt(len(rmse_scores)), 5),
+        'Mean MAE': round(np.mean(mae_scores), 5),
+        'Std Error MAE': round(np.std(mae_scores) / np.sqrt(len(mae_scores)), 5),
+        'Mean R2': round(np.mean(r2_scores), 5),
+        'Std Error R2': round(np.std(r2_scores) / np.sqrt(len(r2_scores)), 5),
     })
 
-metrics_df = pd.DataFrame(metrics)
-metrics_csv = os.path.join(fig_dir, f'{name}_model_metrics.csv')
-metrics_df.to_csv(metrics_csv, index=False)
+    # Save best model
+    joblib.dump(best_model, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
 
-fig, ax = plt.subplots(figsize=(8,5))
-x, w = np.arange(len(metrics_df)), 0.35
-ax.bar(x - w/2, metrics_df['MAE'], w, label='MAE')
-ax.bar(x + w/2, metrics_df['MSE'], w, label='MSE')
-ax.set_xticks(x)
-ax.set_xticklabels(metrics_df['Model'], rotation=45, ha='right')
-ax.set_ylabel('Error')
-ax.set_title(f'{name}: MAE vs MSE by Model')
-ax.legend()
+results_df = pd.DataFrame(results)
+results_df.to_csv(os.path.join(results_dir, f'{name}_gridsearch_cv_full_metrics.csv'), index=False)
+
+# Boxplots
+r2_box = {}
+mse_box = {}
+
+for model_name, model_pipeline in models.items():
+    print(f"Collecting fold scores for {model_name}")
+    grid = GridSearchCV(model_pipeline, grids[model_name], cv=cv, scoring=mse_scorer, n_jobs=-1, refit=True)
+    grid.fit(X, y)
+    best_model = grid.best_estimator_
+
+    # Store per-fold scores
+    r2_scores = cross_val_score(best_model, X, y, cv=cv, scoring='r2')
+    mse_scores = -cross_val_score(best_model, X, y, cv=cv, scoring='neg_mean_squared_error')
+
+    r2_box[model_name] = r2_scores
+    mse_box[model_name] = mse_scores
+
+# === Convert to DataFrames ===
+r2_df = pd.DataFrame(r2_box)
+mse_df = pd.DataFrame(mse_box)
+
+# === Plot R² Boxplot ===
+plt.figure(figsize=(10, 5))
+sns.boxplot(data=r2_df)
+plt.title('Cross-Validated R² by Model')
+plt.ylabel('R² Score')
+plt.xticks(rotation=45)
 plt.tight_layout()
-fig.savefig(os.path.join(fig_dir, f'{name}_error_comparison.png'),
-            dpi=300, bbox_inches='tight')
-plt.close(fig)
+plt.savefig(os.path.join(fig_dir, f'{name}_r2_boxplot.png'), dpi=300)
+plt.close()
 
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
-# Prepare DataFrames: fold_r2 and fold_mse are dicts of lists
-r2_box = pd.DataFrame(fold_r2)
-mse_box = pd.DataFrame(fold_mse)
-
-# R² box‐plot
-r2_box.plot.box(ax=axes[0])
-axes[0].set_ylabel('R²')
-axes[0].set_title('CV R² Distributions')
-
-# MSE box‐plot
-mse_box.plot.box(ax=axes[1])
-axes[1].set_ylabel('MSE')
-axes[1].set_title('CV MSE Distributions')
-
+# === Plot MSE Boxplot ===
+plt.figure(figsize=(10, 5))
+sns.boxplot(data=mse_df)
+plt.title('Cross-Validated MSE by Model')
+plt.ylabel('Mean Squared Error')
+plt.xticks(rotation=45)
 plt.tight_layout()
-fig.savefig(os.path.join(fig_dir, f'{name}_cv_distributions_r2_mse.png'),
-            dpi=300, bbox_inches='tight')
-plt.close(fig)
+plt.savefig(os.path.join(fig_dir, f'{name}_mse_boxplot.png'), dpi=300)
+plt.close()
