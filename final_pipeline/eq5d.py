@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPRegressor
 
 
-name = 'eq5d_round2'
+name = 'eq5d_round4'
 results_dir = '/rds/general/user/hsl121/home/hda_project/final_pipeline/results'
 fig_dir = os.path.join(results_dir, 'figures')
 models_dir = os.path.join(results_dir, 'models')
@@ -50,9 +50,9 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
 ]
 X = full.drop(columns=drop_cols)
-y = full['EQ5D_Round2']
+y = full['EQ5D_Round4']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='EQ5D_Round2'), data['EQ5D_Round2']
+X, y = data.drop(columns='EQ5D_Round4'), data['EQ5D_Round4']
 
 # Train/test split
 X_train, X_test, y_train, y_test = train_test_split(
