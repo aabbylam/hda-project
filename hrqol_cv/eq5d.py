@@ -19,10 +19,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib
+import seaborn as sns
 
 
 
-name = 'eq5d_round2'
+name = 'eq5d_round4'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol_cv/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -59,9 +60,9 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
 ]
 X = full.drop(columns=drop_cols)
-y = full['EQ5D_Round2']
+y = full['EQ5D_Round4']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='EQ5D_Round2'), data['EQ5D_Round2']
+X, y = data.drop(columns='EQ5D_Round4'), data['EQ5D_Round4']
 
 # Define models and parameter grids
 def get_models_and_grids():
