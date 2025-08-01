@@ -54,13 +54,26 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
 ]
 
-X = full.drop(columns=drop_cols)
+# Separate features and target properly
+X = full.drop(columns=drop_cols + ['adverse_binary'])  # Make sure to exclude adverse_binary from features
 y = full['adverse_binary']
+
+# Remove rows with missing values
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='adverse_binary'), data['adverse_binary']
+X_clean = data.drop(columns='adverse_binary')
+y_clean = data['adverse_binary']
 
 # Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_clean, y_clean, test_size=0.2, random_state=42)
+
+# Debug: Check what y_train actually contains
+print(f"y_train type: {type(y_train)}")
+print(f"y_train shape: {y_train.shape}")
+if hasattr(y_train, 'columns'):
+    print(f"y_train columns: {list(y_train.columns)}")
+if isinstance(y_train, pd.DataFrame):
+    print(f"y_train head:\n{y_train.head()}")
+    y_train = y_train['adverse_binary']  # Extract the column if it's a DataFrame
 
 def match_controls_to_cases(cases, controls, match_vars):
     scaler = StandardScaler()
@@ -77,7 +90,13 @@ def match_controls_to_cases(cases, controls, match_vars):
 
 # Create combined training dataframe with proper index handling
 train_combined = pd.DataFrame(X_train)
-train_combined['adverse_binary'] = y_train.values  # Use .values to avoid index issues
+# Ensure y_train is a Series, not a DataFrame
+if isinstance(y_train, pd.DataFrame):
+    y_train_series = y_train.iloc[:, 0]  # Take first column if DataFrame
+else:
+    y_train_series = y_train
+
+train_combined['adverse_binary'] = y_train_series.values  # Use .values to avoid index issues
 
 cases = train_combined[train_combined['adverse_binary'] == 1].reset_index(drop=True)
 controls = train_combined[train_combined['adverse_binary'] == 0].reset_index(drop=True)
@@ -103,8 +122,8 @@ def get_models_and_grids():
 
     # Keep your original grid search parameters
     grids = {
-        'Ridge': {'model__alpha': [0.1, 1.0, 10.0]},  # RidgeClassifier uses alpha
-        'Lasso': {'model__C': [0.01, 0.1, 1.0]},      # LogisticRegression uses C (inverse of alpha)
+        'Ridge': {'model__alpha': [0.1, 1.0, 10.0]}, 
+        'Lasso': {'model__C': [0.01, 0.1, 1.0]},     
         'RandomForest': {
             'model__n_estimators': [100, 200, 500],
             'model__max_depth': [None, 5, 10, 20],
@@ -133,8 +152,12 @@ def get_models_and_grids():
 
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 
-summary = []
 models, param_grids = get_models_and_grids()
+
+from sklearn.metrics import classification_report, roc_auc_score, accuracy_score
+
+summary = []
+detailed_metrics = []
 
 for model_name, model in models.items():
     print(f"Tuning {model_name}...")
@@ -142,33 +165,51 @@ for model_name, model in models.items():
     gs.fit(X_train_sub, y_train_sub)
     best_model = gs.best_estimator_
 
-    # Cross-validated scores for summary
-    f1_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='f1')
-    roc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='roc_auc')
+    # Cross-validation metrics
+    auc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='roc_auc')
+    acc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='accuracy')
 
     summary.append({
         'Model': model_name,
-        'F1_Mean': round(f1_scores.mean(), 3),
-        'F1_SD': round(f1_scores.std(), 3),
-        'ROC_Mean': round(roc_scores.mean(), 3),
-        'ROC_SD': round(roc_scores.std(), 3),
+        'AUC_Mean': round(auc_scores.mean(), 3),
+        'AUC_SD': round(auc_scores.std(), 3),
+        'Accuracy_Mean': round(acc_scores.mean(), 3),
+        'Accuracy_SD': round(acc_scores.std(), 3),
         'Best_Params': gs.best_params_
     })
 
-    # Save best model
+    # Detailed classification metrics on best model
+    y_pred = best_model.predict(X_train_sub)
+    report = classification_report(y_train_sub, y_pred, output_dict=True, zero_division=0)
+
+    detailed_metrics.append({
+        'Model': model_name,
+        'Precision_0': round(report['0']['precision'], 3),
+        'Recall_0': round(report['0']['recall'], 3),
+        'F1_0': round(report['0']['f1-score'], 3),
+        'Precision_1': round(report['1']['precision'], 3),
+        'Recall_1': round(report['1']['recall'], 3),
+        'F1_1': round(report['1']['f1-score'], 3),
+    })
+
+    # Save model
     joblib.dump(best_model, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
-# === Save results ===
+# Save summary of CV performance
 summary_df = pd.DataFrame(summary)
 summary_df.to_csv(os.path.join(results_dir, f'{name}_model_metrics_summary.csv'), index=False)
 
-# === Plot bar chart with error bars ===
+# Save best model classification metrics
+detailed_df = pd.DataFrame(detailed_metrics)
+detailed_df.to_csv(os.path.join(results_dir, f'{name}_best_model_metrics.csv'), index=False)
+
+# Plot AUC and Accuracy
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.arange(len(summary_df['Model']))
 width = 0.35
 
-ax.bar(x - width/2, summary_df['F1_Mean'], width, yerr=summary_df['F1_SD'], label='F1 Score', capsize=5)
-ax.bar(x + width/2, summary_df['ROC_Mean'], width, yerr=summary_df['ROC_SD'], label='ROC AUC', capsize=5)
+ax.bar(x - width/2, summary_df['AUC_Mean'], width, yerr=summary_df['AUC_SD'], label='AUC', capsize=5)
+ax.bar(x + width/2, summary_df['Accuracy_Mean'], width, yerr=summary_df['Accuracy_SD'], label='Accuracy', capsize=5)
 
 ax.set_xticks(x)
 ax.set_xticklabels(summary_df['Model'])
@@ -178,3 +219,4 @@ ax.legend()
 plt.tight_layout()
 plt.savefig(os.path.join(fig_dir, f'{name}_model_performance.png'), dpi=300)
 plt.close()
+
