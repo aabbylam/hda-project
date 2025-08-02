@@ -1,6 +1,6 @@
 #PBS -l walltime=48:00:00
 #PBS -l select=1:ncpus=20:mem=400gb
-#PBS -N gad7_round2
+#PBS -N gad7_round4
 
 
 cd /rds/general/user/hsl121/home/hda_project/hrqol_cv

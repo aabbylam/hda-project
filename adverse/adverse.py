@@ -58,45 +58,18 @@ drop_cols = [
 X = full.drop(columns=drop_cols + ['adverse_binary'])  # Make sure to exclude adverse_binary from features
 y = full['adverse_binary']
 
-# Remove rows with missing values
+# === STEP 1: Train-test split before balancing ===
 data = pd.concat([X, y], axis=1).dropna()
 X_clean = data.drop(columns='adverse_binary')
 y_clean = data['adverse_binary']
 
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X_clean, y_clean, test_size=0.2, random_state=42)
+X_train_full, X_test, y_train_full, y_test = train_test_split(
+    X_clean, y_clean, test_size=0.2, stratify=y_clean, random_state=42
+)
 
-# Debug: Check what y_train actually contains
-print(f"y_train type: {type(y_train)}")
-print(f"y_train shape: {y_train.shape}")
-if hasattr(y_train, 'columns'):
-    print(f"y_train columns: {list(y_train.columns)}")
-if isinstance(y_train, pd.DataFrame):
-    print(f"y_train head:\n{y_train.head()}")
-    y_train = y_train['adverse_binary']  # Extract the column if it's a DataFrame
 
-def match_controls_to_cases(cases, controls, match_vars):
-    scaler = StandardScaler()
-    controls_scaled = scaler.fit_transform(controls[match_vars])
-    cases_scaled = scaler.transform(cases[match_vars])
-
-    nn = NearestNeighbors(n_neighbors=1)
-    nn.fit(controls_scaled)
-    _, indices = nn.kneighbors(cases_scaled)
-
-    matched_controls = controls.iloc[indices.flatten()].copy()
-    matched_controls['matched_to'] = cases.index.values
-    return matched_controls
-
-# Create combined training dataframe with proper index handling
-train_combined = pd.DataFrame(X_train)
-# Ensure y_train is a Series, not a DataFrame
-if isinstance(y_train, pd.DataFrame):
-    y_train_series = y_train.iloc[:, 0]  # Take first column if DataFrame
-else:
-    y_train_series = y_train
-
-train_combined['adverse_binary'] = y_train_series.values  # Use .values to avoid index issues
+train_combined = pd.DataFrame(X_train_full)
+train_combined['adverse_binary'] = y_train_full.values
 
 cases = train_combined[train_combined['adverse_binary'] == 1].reset_index(drop=True)
 controls = train_combined[train_combined['adverse_binary'] == 0].reset_index(drop=True)
@@ -109,52 +82,9 @@ matched_df = pd.concat([cases, matched_controls], ignore_index=True)
 X_train_sub = matched_df.drop(columns=['adverse_binary', 'matched_to'], errors='ignore')
 y_train_sub = matched_df['adverse_binary']
 
-def get_models_and_grids():
-    from sklearn.linear_model import RidgeClassifier
-    
-    models = {
-        'Ridge': Pipeline([('scaler', StandardScaler()), ('model', RidgeClassifier(random_state=42))]),
-        'Lasso': Pipeline([('scaler', StandardScaler()), ('model', LogisticRegression(penalty='l1', solver='liblinear', random_state=42, max_iter=1000))]),
-        'RandomForest': Pipeline([('scaler', StandardScaler()), ('model', RandomForestClassifier(random_state=42))]),
-        'XGB': Pipeline([('scaler', StandardScaler()), ('model', XGBClassifier(random_state=42, eval_metric='logloss'))]),
-        'MLP': Pipeline([('scaler', StandardScaler()), ('model', MLPClassifier(random_state=42, max_iter=1000))])
-    }
-
-    # Keep your original grid search parameters
-    grids = {
-        'Ridge': {'model__alpha': [0.1, 1.0, 10.0]}, 
-        'Lasso': {'model__C': [0.01, 0.1, 1.0]},     
-        'RandomForest': {
-            'model__n_estimators': [100, 200, 500],
-            'model__max_depth': [None, 5, 10, 20],
-            'model__min_samples_split': [2, 5, 10],
-            'model__min_samples_leaf': [1, 2, 4],
-            'model__max_features': ['auto', 'sqrt', 'log2']
-        },
-        'XGB': {
-            'model__n_estimators': [100, 200, 300],
-            'model__max_depth': [3, 6, 9, 12],
-            'model__learning_rate': [0.001, 0.01, 0.1, 0.2],
-            'model__subsample': [0.6, 0.8, 1.0],
-            'model__colsample_bytree': [0.6, 0.8, 1.0]
-        },
-        'MLP': {
-            'model__hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (200, 100, 50), (300, 200, 100), (100, 100, 50, 25)],
-            'model__activation': ['relu', 'tanh'],
-            'model__solver': ['adam', 'sgd'],
-            'model__alpha': [1e-5, 1e-4, 1e-3],
-            'model__learning_rate_init': [1e-3, 1e-2],
-            'model__batch_size': [32, 64, 128, 256]
-        }
-    }
-
-    return models, grids
-
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
-
+# === STEP 3: Cross-validation and model selection ===
 models, param_grids = get_models_and_grids()
-
-from sklearn.metrics import classification_report, roc_auc_score, accuracy_score
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
 
 summary = []
 detailed_metrics = []
@@ -165,7 +95,6 @@ for model_name, model in models.items():
     gs.fit(X_train_sub, y_train_sub)
     best_model = gs.best_estimator_
 
-    # Cross-validation metrics
     auc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='roc_auc')
     acc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='accuracy')
 
@@ -178,9 +107,11 @@ for model_name, model in models.items():
         'Best_Params': gs.best_params_
     })
 
-    # Detailed classification metrics on best model
-    y_pred = best_model.predict(X_train_sub)
-    report = classification_report(y_train_sub, y_pred, output_dict=True, zero_division=0)
+    best_model.fit(X_train_sub, y_train_sub)
+    joblib.dump(best_model, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
+
+    y_test_pred = best_model.predict(X_test)
+    report = classification_report(y_test, y_test_pred, output_dict=True, zero_division=0)
 
     detailed_metrics.append({
         'Model': model_name,
@@ -190,20 +121,16 @@ for model_name, model in models.items():
         'Precision_1': round(report['1']['precision'], 3),
         'Recall_1': round(report['1']['recall'], 3),
         'F1_1': round(report['1']['f1-score'], 3),
+        'Accuracy': round(accuracy_score(y_test, y_test_pred), 3),
+        'AUC': round(roc_auc_score(y_test, best_model.predict_proba(X_test)[:, 1]), 3)
     })
 
-    # Save model
-    joblib.dump(best_model, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
-# Save summary of CV performance
+pd.DataFrame(summary).to_csv(os.path.join(results_dir, f'{name}_model_metrics_summary.csv'), index=False)
+pd.DataFrame(detailed_metrics).to_csv(os.path.join(results_dir, f'{name}_best_model_metrics.csv'), index=False)
+
+
 summary_df = pd.DataFrame(summary)
-summary_df.to_csv(os.path.join(results_dir, f'{name}_model_metrics_summary.csv'), index=False)
-
-# Save best model classification metrics
-detailed_df = pd.DataFrame(detailed_metrics)
-detailed_df.to_csv(os.path.join(results_dir, f'{name}_best_model_metrics.csv'), index=False)
-
-# Plot AUC and Accuracy
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.arange(len(summary_df['Model']))
 width = 0.35
@@ -214,9 +141,8 @@ ax.bar(x + width/2, summary_df['Accuracy_Mean'], width, yerr=summary_df['Accurac
 ax.set_xticks(x)
 ax.set_xticklabels(summary_df['Model'])
 ax.set_ylabel("Score")
-ax.set_title("Model Performance (5-fold CV)")
+ax.set_title("Model Performance (5-fold CV on Balanced Train, Eval on Raw Test)")
 ax.legend()
 plt.tight_layout()
 plt.savefig(os.path.join(fig_dir, f'{name}_model_performance.png'), dpi=300)
 plt.close()
-
