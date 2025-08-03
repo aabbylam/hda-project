@@ -8,3 +8,4 @@
 *.xlsm
 data/
 Protocol and data framework/
+UI/core.*
