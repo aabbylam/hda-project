@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/hda_project/hrqol_cv/shap.py", line 3, in <module>
+    import shap
+  File "/rds/general/user/hsl121/home/hda_project/hrqol_cv/shap.py", line 67, in <module>
+    explainer = shap.TreeExplainer(core_model)
+AttributeError: partially initialized module 'shap' has no attribute 'TreeExplainer' (most likely due to a circular import)
