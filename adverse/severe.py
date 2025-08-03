@@ -15,7 +15,7 @@ from sklearn.metrics import f1_score, roc_auc_score, make_scorer
 from sklearn.neighbors import NearestNeighbors
 
 
-name = 'any_adverse_binary'
+name = 'severe_adverse_binary'
 base_dir = '/rds/general/user/hsl121/home/hda_project/adverse/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -39,8 +39,8 @@ ins_wide = ins.pivot_table(index='SID', columns='Round', values='total_score', a
 ins_wide.columns = [f"insomniaEfficacyMeasure_Round{r}" for r in ins_wide.columns]
 ins_wide = ins_wide.reset_index()
 full = pd.merge(gad7, ins_wide, on='SID', how='left')
-df = pd.read_csv('../rq1/rq1_cleaned_adverse_binary.csv')
-full['adverse_binary'] = df['adverse_binary']
+df = pd.read_csv('../rq1/rq1_cleaned_adverse_severe.csv')
+full['severe_adverse_binary'] = df['severe_adverse_binary']
 
 drop_cols = [
     'SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD7_Round6','GAD7_Round7',
@@ -55,13 +55,13 @@ drop_cols = [
 ]
 
 # Separate features and target properly
-X = full.drop(columns=drop_cols + ['adverse_binary'])  # Make sure to exclude adverse_binary from features
-y = full['adverse_binary']
+X = full.drop(columns=drop_cols + ['severe_adverse_binary'])  # Make sure to exclude adverse_binary from features
+y = full['severe_adverse_binary']
 
 # === STEP 1: Train-test split before balancing ===
 data = pd.concat([X, y], axis=1).dropna()
-X_clean = data.drop(columns='adverse_binary')
-y_clean = data['adverse_binary']
+X_clean = data.drop(columns='severe_adverse_binary')
+y_clean = data['severe_adverse_binary']
 
 X_train_full, X_test, y_train_full, y_test = train_test_split(
     X_clean, y_clean, test_size=0.2, stratify=y_clean, random_state=42
@@ -69,10 +69,10 @@ X_train_full, X_test, y_train_full, y_test = train_test_split(
 
 
 train_combined = pd.DataFrame(X_train_full)
-train_combined['adverse_binary'] = y_train_full.values
+train_combined['severe_adverse_binary'] = y_train_full.values
 
-cases = train_combined[train_combined['adverse_binary'] == 1].reset_index(drop=True)
-controls = train_combined[train_combined['adverse_binary'] == 0].reset_index(drop=True)
+cases = train_combined[train_combined['severe_adverse_binary'] == 1].reset_index(drop=True)
+controls = train_combined[train_combined['severe_adverse_binary'] == 0].reset_index(drop=True)
 
 def match_controls_to_cases(cases, controls, match_vars):
     scaler = StandardScaler()
@@ -93,8 +93,8 @@ ctrl_sample = controls.sample(frac=1, random_state=0).reset_index(drop=True)
 matched_controls = match_controls_to_cases(cases, ctrl_sample, match_vars)
 matched_df = pd.concat([cases, matched_controls], ignore_index=True)
 
-X_train_sub = matched_df.drop(columns=['adverse_binary', 'matched_to'], errors='ignore')
-y_train_sub = matched_df['adverse_binary']
+X_train_sub = matched_df.drop(columns=['severe_adverse_binary', 'matched_to'], errors='ignore')
+y_train_sub = matched_df['severe_adverse_binary']
 
 # === STEP 3: Cross-validation and model selection ===
 models, param_grids = get_models_and_grids()
