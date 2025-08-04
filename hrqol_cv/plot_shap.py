@@ -1,8 +1,8 @@
 import os
 import joblib
-import hrqol_cv.plot_shap as plot_shap
 import matplotlib.pyplot as plt
 import pandas as pd
+import shap
 
 # Set these paths
 name = 'eq5d_round2'
@@ -64,15 +64,15 @@ for file in os.listdir(models_dir):
 
     # Select SHAP explainer based on model type
     if 'RandomForest' in model_name or 'XGB' in model_name:
-        explainer = plot_shap.TreeExplainer(core_model)
+        explainer = shap.TreeExplainer(core_model)
         shap_values = explainer.shap_values(X_scaled)
         class_idx = 1 if isinstance(shap_values, list) else 0
     elif 'Ridge' in model_name or 'Lasso' in model_name:
-        explainer = plot_shap.LinearExplainer(core_model, X_scaled)
+        explainer = shap.LinearExplainer(core_model, X_scaled)
         shap_values = explainer.shap_values(X_scaled)
         class_idx = 1 if shap_values.ndim == 3 else 0
     else:  # fallback for MLP or unsupported models
-        explainer = plot_shap.KernelExplainer(core_model.predict_proba, plot_shap.sample(X_scaled, 100))
+        explainer = shap.KernelExplainer(core_model.predict_proba, shap.sample(X_scaled, 100))
         shap_values = explainer.shap_values(X_scaled[:100])
         class_idx = 1
 
@@ -83,14 +83,14 @@ for file in os.listdir(models_dir):
         feature_names = [f'Feature {i}' for i in range(X.shape[1])]
 
     # Summary bar plot
-    plot_shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, plot_type='bar', show=False)
+    shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, plot_type='bar', show=False)
     plt.title(f"SHAP Feature Importance: {model_name}")
     plt.tight_layout()
     plt.savefig(os.path.join(fig_dir, f'shap_bar_{model_name}.png'), dpi=300)
     plt.close()
 
     # Optional: full summary dot plot
-    plot_shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, show=False)
+    shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, show=False)
     plt.title(f"SHAP Summary: {model_name}")
     plt.tight_layout()
     plt.savefig(os.path.join(fig_dir, f'shap_summary_{model_name}.png'), dpi=300)
