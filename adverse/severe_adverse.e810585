@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/rds/general/user/hsl121/home/hda_project/adverse/severe.py", line 79, in <module>
-    matched_controls = match_controls_to_cases(cases, ctrl_sample, match_vars)
-NameError: name 'match_controls_to_cases' is not defined

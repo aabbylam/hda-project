@@ -97,6 +97,64 @@ X_train_sub = matched_df.drop(columns=['severe_adverse_binary', 'matched_to'], e
 y_train_sub = matched_df['severe_adverse_binary']
 
 # === STEP 3: Cross-validation and model selection ===
+
+def get_models_and_grids():
+    models = {
+        'Ridge': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', LogisticRegression(penalty='l2', solver='lbfgs', max_iter=1000, class_weight='balanced', random_state=42))
+        ]),
+        'Lasso': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', LogisticRegression(penalty='l1', solver='liblinear', max_iter=1000, class_weight='balanced', random_state=42))
+        ]),
+        'RandomForest': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', RandomForestClassifier(class_weight='balanced', random_state=42))
+        ]),
+        'XGB': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42))
+        ]),
+        'MLP': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', MLPClassifier(max_iter=1000, random_state=42))
+        ])
+    }
+
+    grids = {
+        'Ridge': {
+            'model__C': [0.01, 0.1, 1, 10]  # inverse of regularization strength
+        },
+        'Lasso': {
+            'model__C': [0.01, 0.1, 1, 10]
+        },
+        'RandomForest': {
+            'model__n_estimators': [100, 200, 500],
+            'model__max_depth': [None, 5, 10, 20],
+            'model__min_samples_split': [2, 5, 10],
+            'model__min_samples_leaf': [1, 2, 4],
+            'model__max_features': ['auto', 'sqrt', 'log2']
+        },
+        'XGB': {
+            'model__n_estimators': [100, 200, 300],
+            'model__max_depth': [3, 6, 9, 12],
+            'model__learning_rate': [0.001, 0.01, 0.1, 0.2],
+            'model__subsample': [0.6, 0.8, 1.0],
+            'model__colsample_bytree': [0.6, 0.8, 1.0]
+        },
+        'MLP': {
+            'model__hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (300, 200, 100)],
+            'model__activation': ['relu', 'tanh'],
+            'model__solver': ['adam', 'sgd'],
+            'model__alpha': [1e-5, 1e-4, 1e-3],
+            'model__learning_rate_init': [1e-3, 1e-2],
+            'model__batch_size': [32, 64, 128, 256]
+        }
+    }
+
+    return models, grids
+
 models, param_grids = get_models_and_grids()
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 
