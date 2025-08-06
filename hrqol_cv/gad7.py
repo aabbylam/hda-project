@@ -23,7 +23,7 @@ import seaborn as sns
 
 
 
-name = 'gad7_round4'
+name = 'gad7_round2'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol_cv/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -47,6 +47,7 @@ ins_wide.columns = [f"insomniaEfficacyMeasure_Round{r}" for r in ins_wide.column
 ins_wide = ins_wide.reset_index()
 full = pd.merge(gad7, ins_wide, on='SID', how='left')
 
+
 # Prepare features and target
 drop_cols = [
     'SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD7_Round6','GAD7_Round7',
@@ -57,12 +58,16 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round6','insomniaEfficacyMeasure_Round7',
     'insomniaEfficacyMeasure_Round8','insomniaEfficacyMeasure_Round9',
     'insomniaEfficacyMeasure_Round10','insomniaEfficacyMeasure_Round11',
-    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
+    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13', 'GAD7_Round1_y', 'insomniaEfficacyMeasure_Round1_y'
 ]
 X = full.drop(columns=drop_cols)
-y = full['GAD7_Round4']
+y = full['GAD7_Round2']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='GAD7_Round4'), data['GAD7_Round4']
+X, y = data.drop(columns='GAD7_Round2'), data['GAD7_Round2']
+
+X=X.rename(columns={
+    'GAD7_Round1_x': 'GAD7_Round1',
+    'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'})
 
 # Define models and parameter grids
 def get_models_and_grids():

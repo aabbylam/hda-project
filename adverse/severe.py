@@ -13,7 +13,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score, roc_auc_score, make_scorer
 from sklearn.neighbors import NearestNeighbors
-
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 
 name = 'severe_adverse_binary'
 base_dir = '/rds/general/user/hsl121/home/hda_project/adverse/results'

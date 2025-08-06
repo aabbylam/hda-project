@@ -2,19 +2,21 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import joblib   
+import joblib
 
-from sklearn.model_selection import train_test_split, GridSearchCV, KFold, cross_val_score
-from sklearn.linear_model import LogisticRegression, Ridge, Lasso
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from xgboost import XGBClassifier, XGBRegressor
-from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.model_selection import StratifiedKFold, GridSearchCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import f1_score, roc_auc_score, make_scorer
-from sklearn.neighbors import NearestNeighbors
+from sklearn.metrics import (
+    balanced_accuracy_score, roc_auc_score, f1_score, precision_score,
+    recall_score, classification_report, make_scorer
+)
 
-
+# === SETUP ===
 name = 'any_adverse_binary'
 base_dir = '/rds/general/user/hsl121/home/hda_project/adverse/results'
 results_dir = os.path.join(base_dir, name)
@@ -23,11 +25,12 @@ models_dir = os.path.join(results_dir, 'models')
 os.makedirs(fig_dir, exist_ok=True)
 os.makedirs(models_dir, exist_ok=True)
 
-
-# Load data
+# === LOAD DATA ===
 eq5d = pd.read_csv('../rq1/rq1_cleaned_no_ae.csv')
 scores = pd.read_excel('../data/Scores 6 Jan 2025_Prescribed_Completed Baseline PROMs.xlsx')
+df = pd.read_csv('../rq1/rq1_cleaned_adverse_binary.csv')
 
+# === MERGE PROMs ===
 gad7 = scores[scores['promName']=='GAD7'][['SID','Round','total_score']]
 gad7_wide = gad7.pivot_table(index='SID', columns='Round', values='total_score', aggfunc='first')
 gad7_wide.columns = [f"GAD7_Round{r}" for r in gad7_wide.columns]
@@ -38,125 +41,191 @@ ins = scores[scores['promName']=='insomniaEfficacyMeasure'][['SID','Round','tota
 ins_wide = ins.pivot_table(index='SID', columns='Round', values='total_score', aggfunc='first')
 ins_wide.columns = [f"insomniaEfficacyMeasure_Round{r}" for r in ins_wide.columns]
 ins_wide = ins_wide.reset_index()
-full = pd.merge(gad7, ins_wide, on='SID', how='left')
-df = pd.read_csv('../rq1/rq1_cleaned_adverse_binary.csv')
-full['adverse_binary'] = df['adverse_binary']
 
-drop_cols = [
-    'SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD7_Round6','GAD7_Round7',
-    'GAD7_Round8','GAD7_Round9','GAD7_Round10','GAD7_Round11','GAD7_Round12',
-    'GAD7_Round13', 'EQ5D_Round2','EQ5D_Round3','EQ5D_Round4','EQ5D_Round5',
-    'EQ5D_Round6', 'insomniaEfficacyMeasure_Round2','insomniaEfficacyMeasure_Round3',
-    'insomniaEfficacyMeasure_Round4','insomniaEfficacyMeasure_Round5',
-    'insomniaEfficacyMeasure_Round6','insomniaEfficacyMeasure_Round7',
-    'insomniaEfficacyMeasure_Round8','insomniaEfficacyMeasure_Round9',
-    'insomniaEfficacyMeasure_Round10','insomniaEfficacyMeasure_Round11',
-    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
+full = pd.merge(gad7, ins_wide, on='SID', how='left')
+full['adverse_binary'] = df['adverse_binary'].astype(int)
+
+# === CLEAN DATA ===
+drop_cols = ['SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD7_Round6','GAD7_Round7',
+             'GAD7_Round8','GAD7_Round9','GAD7_Round10','GAD7_Round11','GAD7_Round12','GAD7_Round13',
+             'EQ5D_Round2','EQ5D_Round3','EQ5D_Round4','EQ5D_Round5','EQ5D_Round6',
+             'insomniaEfficacyMeasure_Round2','insomniaEfficacyMeasure_Round3','insomniaEfficacyMeasure_Round4',
+             'insomniaEfficacyMeasure_Round5','insomniaEfficacyMeasure_Round6','insomniaEfficacyMeasure_Round7',
+             'insomniaEfficacyMeasure_Round8','insomniaEfficacyMeasure_Round9','insomniaEfficacyMeasure_Round10',
+             'insomniaEfficacyMeasure_Round11','insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13','GAD7_Round1_y', 'insomniaEfficacyMeasure_Round1_y'
 ]
 
-# Separate features and target properly
-X = full.drop(columns=drop_cols + ['adverse_binary'])  # Make sure to exclude adverse_binary from features
-y = full['adverse_binary']
+X = full.drop(columns=drop_cols)
+y=full['adverse_binary']
 
-# === STEP 1: Train-test split before balancing ===
 data = pd.concat([X, y], axis=1).dropna()
-X_clean = data.drop(columns='adverse_binary')
-y_clean = data['adverse_binary']
+X, y = data.drop(columns='adverse_binary'), data['adverse_binary']
+X = X.rename(columns={
+    'GAD7_Round1_x': 'GAD7_Round1',
+    'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'
+})
 
-X_train_full, X_test, y_train_full, y_test = train_test_split(
-    X_clean, y_clean, test_size=0.2, stratify=y_clean, random_state=42
-)
+y = data.loc[:, 'adverse_binary'].iloc[:, 0] 
 
+# === CLASS WEIGHTS ===
+n_pos = sum(y == 1)
+n_neg = sum(y == 0)
+class_weights = {0: 1, 1: n_neg/n_pos}
 
-train_combined = pd.DataFrame(X_train_full)
-train_combined['adverse_binary'] = y_train_full.values
+# === MODEL SETUP ===
+def get_models_and_grids():
+    models = {
+        'Ridge': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', LogisticRegression(penalty='l2', solver='liblinear',
+                                         class_weight='balanced', random_state=42))
+        ]),
+        'Lasso': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', LogisticRegression(penalty='l1', solver='liblinear',
+                                         class_weight='balanced', random_state=42))
+        ]),
+        'RandomForest': RandomForestClassifier(class_weight='balanced', random_state=42),
+        'XGB': XGBClassifier(scale_pos_weight=n_neg/n_pos, random_state=42, eval_metric='logloss', use_label_encoder=False),
+        'MLP': MLPClassifier(random_state=42, max_iter=1000)
+    }
 
-cases = train_combined[train_combined['adverse_binary'] == 1].reset_index(drop=True)
-controls = train_combined[train_combined['adverse_binary'] == 0].reset_index(drop=True)
+    param_grids = {
+        'Ridge': {'model__C': [0.01, 0.1, 1, 10]},
+        'Lasso': {'model__C': [0.01, 0.1, 1, 10]},
+        'RandomForest': {
+            'n_estimators': [100, 200, 500],
+            'max_depth': [None, 5, 10, 20],
+            'min_samples_split': [2, 5, 10],
+            'min_samples_leaf': [1, 2, 4],
+            'max_features': ['auto', 'sqrt', 'log2']
+        },
+        'XGB': {
+            'n_estimators': [100, 200, 300],
+            'max_depth': [3, 6, 9, 12],
+            'learning_rate': [0.001, 0.01, 0.1, 0.2],
+            'subsample': [0.6, 0.8, 1.0],
+            'colsample_bytree': [0.6, 0.8, 1.0]
+        },
+        'MLP': {
+            'hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (300, 200, 100)],
+            'activation': ['relu', 'tanh'],
+            'solver': ['adam', 'sgd'],
+            'alpha': [1e-5, 1e-4, 1e-3],
+            'learning_rate_init': [1e-3, 1e-2],
+            'batch_size': [32, 64, 128, 256]
+        }
+    }
+    return models, param_grids
 
-def match_controls_to_cases(cases, controls, match_vars):
-    scaler = StandardScaler()
-    controls_scaled = scaler.fit_transform(controls[match_vars])
-    cases_scaled = scaler.transform(cases[match_vars])
-
-    nn = NearestNeighbors(n_neighbors=1)
-    nn.fit(controls_scaled)
-    _, indices = nn.kneighbors(cases_scaled)
-
-    matched_controls = controls.iloc[indices.flatten()].copy()
-    matched_controls['matched_to'] = cases.index.values
-    return matched_controls
-
-
-match_vars = ['Age', 'Sex', 'weight', 'height']
-ctrl_sample = controls.sample(frac=1, random_state=0).reset_index(drop=True)
-matched_controls = match_controls_to_cases(cases, ctrl_sample, match_vars)
-matched_df = pd.concat([cases, matched_controls], ignore_index=True)
-
-X_train_sub = matched_df.drop(columns=['adverse_binary', 'matched_to'], errors='ignore')
-y_train_sub = matched_df['adverse_binary']
-
-# === STEP 3: Cross-validation and model selection ===
 models, param_grids = get_models_and_grids()
-cv = KFold(n_splits=5, shuffle=True, random_state=42)
 
-summary = []
-detailed_metrics = []
+# === CV SETUP ===
+outer_cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+inner_cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
-for model_name, model in models.items():
-    print(f"Tuning {model_name}...")
-    gs = GridSearchCV(model, param_grids[model_name], cv=cv, scoring='f1', n_jobs=-1)
-    gs.fit(X_train_sub, y_train_sub)
-    best_model = gs.best_estimator_
+# === STORAGE ===
+results = []
 
-    auc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='roc_auc')
-    acc_scores = cross_val_score(best_model, X_train_sub, y_train_sub, cv=cv, scoring='accuracy')
+# === CV LOOP ===
+for model_name in models:
+    print(f"\n=== Training {model_name} ===")
 
-    summary.append({
+    outer_scores = {
+        'balanced_accuracy': [],
+        'auc': [],
+        'f1': [],
+        'precision': [],
+        'recall': [],
+        'per_class': []
+    }
+
+    for train_idx, test_idx in outer_cv.split(X, y):
+        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+
+        if model_name == 'MLP':
+            sample_weights = np.where(y_train == 1, class_weights[1], class_weights[0])
+            gs = GridSearchCV(models[model_name], param_grids[model_name],
+                              scoring=make_scorer(balanced_accuracy_score), cv=inner_cv, n_jobs=-1)
+            gs.fit(X_train, y_train, sample_weight=sample_weights)
+        else:
+            gs = GridSearchCV(models[model_name], param_grids[model_name],
+                              scoring=make_scorer(balanced_accuracy_score), cv=inner_cv, n_jobs=-1)
+            gs.fit(X_train, y_train)
+
+        y_pred = gs.predict(X_test)
+        y_prob = gs.predict_proba(X_test)[:, 1] if hasattr(gs, "predict_proba") else None
+
+        outer_scores['balanced_accuracy'].append(balanced_accuracy_score(y_test, y_pred))
+        outer_scores['auc'].append(roc_auc_score(y_test, y_prob) if y_prob is not None else np.nan)
+        outer_scores['f1'].append(f1_score(y_test, y_pred))
+        outer_scores['precision'].append(precision_score(y_test, y_pred))
+        outer_scores['recall'].append(recall_score(y_test, y_pred))
+        outer_scores['per_class'].append(classification_report(y_test, y_pred, output_dict=True))
+
+    results.append({
         'Model': model_name,
-        'AUC_Mean': round(auc_scores.mean(), 3),
-        'AUC_SD': round(auc_scores.std(), 3),
-        'Accuracy_Mean': round(acc_scores.mean(), 3),
-        'Accuracy_SD': round(acc_scores.std(), 3),
-        'Best_Params': gs.best_params_
+        'Balanced_Accuracy_Mean': np.mean(outer_scores['balanced_accuracy']),
+        'Balanced_Accuracy_Std': np.std(outer_scores['balanced_accuracy']),
+        'AUC_Mean': np.mean(outer_scores['auc']),
+        'F1_Mean': np.mean(outer_scores['f1']),
+        'Precision_Mean': np.mean(outer_scores['precision']),
+        'Recall_Mean': np.mean(outer_scores['recall']),
+        'Best_Params': gs.best_params_,
+        'Per_Class_Metrics': outer_scores['per_class'],
+        'Per_Fold_Scores': {  # <== ADD THIS
+        'balanced_accuracy': outer_scores['balanced_accuracy'],
+        'auc': outer_scores['auc']
+    }
     })
 
-    best_model.fit(X_train_sub, y_train_sub)
-    joblib.dump(best_model, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
+    joblib.dump(gs.best_estimator_, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
-    y_test_pred = best_model.predict(X_test)
-    report = classification_report(y_test, y_test_pred, output_dict=True, zero_division=0)
+# === SAVE RESULTS ===
+results_df = pd.DataFrame(results)
+results_df.to_csv(os.path.join(results_dir, f'{name}_results.csv'), index=False)
 
-    detailed_metrics.append({
-        'Model': model_name,
-        'Precision_0': round(report['0']['precision'], 3),
-        'Recall_0': round(report['0']['recall'], 3),
-        'F1_0': round(report['0']['f1-score'], 3),
-        'Precision_1': round(report['1']['precision'], 3),
-        'Recall_1': round(report['1']['recall'], 3),
-        'F1_1': round(report['1']['f1-score'], 3),
-        'Accuracy': round(accuracy_score(y_test, y_test_pred), 3),
-        'AUC': round(roc_auc_score(y_test, best_model.predict_proba(X_test)[:, 1]), 3)
-    })
-
-
-pd.DataFrame(summary).to_csv(os.path.join(results_dir, f'{name}_model_metrics_summary.csv'), index=False)
-pd.DataFrame(detailed_metrics).to_csv(os.path.join(results_dir, f'{name}_best_model_metrics.csv'), index=False)
-
-
-summary_df = pd.DataFrame(summary)
-fig, ax = plt.subplots(figsize=(10, 6))
-x = np.arange(len(summary_df['Model']))
-width = 0.35
-
-ax.bar(x - width/2, summary_df['AUC_Mean'], width, yerr=summary_df['AUC_SD'], label='AUC', capsize=5)
-ax.bar(x + width/2, summary_df['Accuracy_Mean'], width, yerr=summary_df['Accuracy_SD'], label='Accuracy', capsize=5)
-
-ax.set_xticks(x)
-ax.set_xticklabels(summary_df['Model'])
-ax.set_ylabel("Score")
-ax.set_title("Model Performance (5-fold CV on Balanced Train, Eval on Raw Test)")
-ax.legend()
+# === VISUALIZE BALANCED ACCURACY ===
+plt.figure(figsize=(10, 6))
+x = np.arange(len(results_df))
+plt.bar(x, results_df['Balanced_Accuracy_Mean'], yerr=results_df['Balanced_Accuracy_Std'], capsize=10, alpha=0.7)
+plt.xticks(x, results_df['Model'], rotation=45, ha='right')
+plt.ylabel('Balanced Accuracy')
+plt.title('Model Performance Comparison (5-fold Nested CV)')
+plt.ylim(0, 1)
+plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tight_layout()
-plt.savefig(os.path.join(fig_dir, f'{name}_model_performance.png'), dpi=300)
+plt.savefig(os.path.join(fig_dir, f'{name}_performance.png'), dpi=300)
+plt.close()
+
+
+import seaborn as sns
+
+# 1. Prepare long-format data for boxplot
+box_data = []
+
+for res in results:
+    model = res['Model']
+    ba_scores = res['Per_Fold_Scores']['balanced_accuracy']
+    auc_scores = res['Per_Fold_Scores']['auc']
+
+    for score in ba_scores:
+        box_data.append({'Model': model, 'Metric': 'Balanced Accuracy', 'Value': score})
+    for score in auc_scores:
+        box_data.append({'Model': model, 'Metric': 'AUC', 'Value': score})
+
+
+box_df = pd.DataFrame(box_data)
+
+# 2. Create boxplot
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='Model', y='Value', hue='Metric', data=box_df)
+plt.xticks(rotation=45, ha='right')
+plt.title('Boxplot of Balanced Accuracy and AUC per Model')
+plt.ylabel('Score')
+plt.ylim(0, 1)
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, f'{name}_boxplot_balacc_auc.png'), dpi=300)
 plt.close()

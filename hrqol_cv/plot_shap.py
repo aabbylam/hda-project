@@ -2,13 +2,15 @@ import os
 import joblib
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import shap
+from matplotlib.lines import Line2D
 
-# Set these paths
+# --- Your existing setup code ---
 name = 'eq5d_round2'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol_cv/results'
 models_dir = os.path.join(base_dir, name, 'models')
-fig_dir = os.path.join(base_dir, name, 'figures')
+fig_dir = os.path.join(base_dir, name, 'figures_shap')
 os.makedirs(fig_dir, exist_ok=True)
 
 # Load data
@@ -37,14 +39,23 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round6','insomniaEfficacyMeasure_Round7',
     'insomniaEfficacyMeasure_Round8','insomniaEfficacyMeasure_Round9',
     'insomniaEfficacyMeasure_Round10','insomniaEfficacyMeasure_Round11',
-    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
+    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13', 'GAD7_Round1_y', 'insomniaEfficacyMeasure_Round1_y'
 ]
 X = full.drop(columns=drop_cols)
 y = full['EQ5D_Round2']
 data = pd.concat([X, y], axis=1).dropna()
 X, y = data.drop(columns='EQ5D_Round2'), data['EQ5D_Round2']
 
-# Loop through all models
+X=X.rename(columns={
+    'GAD7_Round1_x': 'GAD7_Round1',
+    'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'})
+
+
+# --- New: Initialize storage for comparison ---
+shap_results = {}
+summary_table = pd.DataFrame()
+
+# --- Your existing model loop (modified) ---
 for file in os.listdir(models_dir):
     if not file.endswith('.pkl') or name not in file:
         continue
@@ -82,6 +93,7 @@ for file in os.listdir(models_dir):
     else:
         feature_names = [f'Feature {i}' for i in range(X.shape[1])]
 
+    # --- Your existing plots ---
     # Summary bar plot
     shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, plot_type='bar', show=False)
     plt.title(f"SHAP Feature Importance: {model_name}")
@@ -89,9 +101,66 @@ for file in os.listdir(models_dir):
     plt.savefig(os.path.join(fig_dir, f'shap_bar_{model_name}.png'), dpi=300)
     plt.close()
 
-    # Optional: full summary dot plot
+    # Full summary dot plot
     shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, show=False)
     plt.title(f"SHAP Summary: {model_name}")
     plt.tight_layout()
     plt.savefig(os.path.join(fig_dir, f'shap_summary_{model_name}.png'), dpi=300)
     plt.close()
+
+    # --- New: Store SHAP results for comparison ---
+    if isinstance(shap_values, list):
+        mean_shap = np.abs(shap_values[class_idx]).mean(axis=0)
+    else:
+        mean_shap = np.abs(shap_values).mean(axis=0)
+    
+    shap_results[model_name] = pd.Series(mean_shap, index=feature_names)
+    summary_table[model_name] = shap_results[model_name]
+
+# --- New: Comparative Analysis Section ---
+# 1. Save summary table to CSV
+summary_table.to_csv(os.path.join(fig_dir, 'shap_comparison_table.csv'))
+
+# 2. Create comparative bar plot
+plt.figure(figsize=(14, 8))
+top_n = 15  # Number of top features to show
+
+# Get top features across all models
+all_features = set()
+for model in shap_results:
+    all_features.update(shap_results[model].nlargest(top_n).index.tolist())
+
+# Prepare data for plotting
+plot_data = pd.DataFrame()
+for feature in all_features:
+    for model in shap_results:
+        plot_data.loc[feature, model] = shap_results[model].get(feature, 0)
+
+# Normalize to percentage of max importance per model
+plot_data = (plot_data / plot_data.max()) * 100
+
+# Sort by total importance
+plot_data = plot_data.loc[plot_data.sum(axis=1).sort_values(ascending=False).index]
+
+# Plot
+colors = plt.cm.tab20.colors
+ax = plot_data.plot(kind='barh', width=0.8, color=colors, figsize=(14, 10))
+plt.title('Comparative Feature Importance Across Models', fontsize=14)
+plt.xlabel('Normalized SHAP Importance (%)', fontsize=12)
+plt.ylabel('Features', fontsize=12)
+plt.legend(title='Models', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.grid(axis='x', linestyle='--', alpha=0.6)
+
+# Add value labels for the top 3 models per feature
+for i, (idx, row) in enumerate(plot_data.iterrows()):
+    top_models = row.nlargest(3)
+    for j, (model, val) in enumerate(top_models.items()):
+        if val > 5:  # Only label significant values
+            ax.text(val + 1, i - 0.1 + j*0.1, f"{model}: {val:.1f}%", 
+                   ha='left', va='center', fontsize=9)
+
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, 'comparative_shap_importance.png'), dpi=300, bbox_inches='tight')
+plt.close()
+
+print("All plots and comparison table saved successfully!")
