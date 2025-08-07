@@ -190,7 +190,12 @@ class MedicalForm(QWidget):
         
         model_paths = {
             'EQ5D Round 2': '../hrqol_cv/results/eq5d_round2/models/eq5d_round2_XGB.pkl',
-            'GAD7 Round 2': '../hrqol_cv/results/gad7_round2/models/gad7_round2_XGB.pkl'
+            'EQ5D Round 3': '../hrqol_cv/results/eq5d_round3/models/eq5d_round3_XGB.pkl',
+            'EQ5D Round 4': '../hrqol_cv/results/eq5d_round4/models/eq5d_round4_XGB.pkl',
+            'GAD7 Round 2': '../hrqol_cv/results/gad7_round2/models/gad7_round2_XGB.pkl',
+            'GAD7 Round 3': '../hrqol_cv/results/gad7_round3/models/gad7_round3_XGB.pkl',
+            'GAD7 Round 4': '../hrqol_cv/results/gad7_round4/models/gad7_round4_XGB.pkl'
+
         }
         
         for name, path in model_paths.items():
@@ -611,6 +616,8 @@ class MedicalForm(QWidget):
                         predictions[model_name] = np.random.uniform(2, 15)
         
         return predictions
+    
+
 
     def prepare_features_for_model(self, data, model_name):
         """Prepare feature vector matching model's expected order"""
