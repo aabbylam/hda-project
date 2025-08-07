@@ -13,7 +13,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (
     balanced_accuracy_score, roc_auc_score, f1_score, precision_score,
-    recall_score, classification_report, make_scorer
+    recall_score, classification_report, confusion_matrix, make_scorer
 )
 
 # === SETUP ===
@@ -86,8 +86,11 @@ def get_models_and_grids():
                                          class_weight='balanced', random_state=42))
         ]),
         'RandomForest': RandomForestClassifier(class_weight='balanced', random_state=42),
-        'XGB': XGBClassifier(scale_pos_weight=n_neg/n_pos, random_state=42, eval_metric='logloss', use_label_encoder=False),
-        'MLP': MLPClassifier(random_state=42, max_iter=1000)
+        'XGB': XGBClassifier(scale_pos_weight=n_neg/n_pos, random_state=42, eval_metric='logloss'),
+        'MLP': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', MLPClassifier(random_state=42, max_iter=1000))
+        ])
     }
 
     param_grids = {
@@ -108,51 +111,46 @@ def get_models_and_grids():
             'colsample_bytree': [0.6, 0.8, 1.0]
         },
         'MLP': {
-            'hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (300, 200, 100)],
-            'activation': ['relu', 'tanh'],
-            'solver': ['adam', 'sgd'],
-            'alpha': [1e-5, 1e-4, 1e-3],
-            'learning_rate_init': [1e-3, 1e-2],
-            'batch_size': [32, 64, 128, 256]
+            'model__hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (300, 200, 100)],
+            'model__activation': ['relu', 'tanh'],
+            'model__solver': ['adam', 'sgd'],
+            'model__alpha': [1e-5, 1e-4, 1e-3],
+            'model__learning_rate_init': [1e-3, 1e-2],
+            'model__batch_size': [32, 64, 128, 256]
         }
     }
     return models, param_grids
 
+# === MODEL SETUP ===
 models, param_grids = get_models_and_grids()
 
 # === CV SETUP ===
 outer_cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-inner_cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-
-# === STORAGE ===
+inner_cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 results = []
 
 # === CV LOOP ===
 for model_name in models:
     print(f"\n=== Training {model_name} ===")
-
+    
     outer_scores = {
         'balanced_accuracy': [],
         'auc': [],
         'f1': [],
         'precision': [],
         'recall': [],
-        'per_class': []
+        'per_class': [],
+        'confusion_matrices': []
     }
 
     for train_idx, test_idx in outer_cv.split(X, y):
         X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
         y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
 
-        if model_name == 'MLP':
-            sample_weights = np.where(y_train == 1, class_weights[1], class_weights[0])
-            gs = GridSearchCV(models[model_name], param_grids[model_name],
-                              scoring=make_scorer(balanced_accuracy_score), cv=inner_cv, n_jobs=-1)
-            gs.fit(X_train, y_train, sample_weight=sample_weights)
-        else:
-            gs = GridSearchCV(models[model_name], param_grids[model_name],
-                              scoring=make_scorer(balanced_accuracy_score), cv=inner_cv, n_jobs=-1)
-            gs.fit(X_train, y_train)
+        # Standard GridSearchCV for all models
+        gs = GridSearchCV(models[model_name], param_grids[model_name],
+                          scoring=make_scorer(balanced_accuracy_score), cv=inner_cv, n_jobs=-1)
+        gs.fit(X_train, y_train)
 
         y_pred = gs.predict(X_test)
         y_prob = gs.predict_proba(X_test)[:, 1] if hasattr(gs, "predict_proba") else None
@@ -163,6 +161,7 @@ for model_name in models:
         outer_scores['precision'].append(precision_score(y_test, y_pred))
         outer_scores['recall'].append(recall_score(y_test, y_pred))
         outer_scores['per_class'].append(classification_report(y_test, y_pred, output_dict=True))
+        outer_scores['confusion_matrices'].append(confusion_matrix(y_test, y_pred))
 
     results.append({
         'Model': model_name,
@@ -174,10 +173,12 @@ for model_name in models:
         'Recall_Mean': np.mean(outer_scores['recall']),
         'Best_Params': gs.best_params_,
         'Per_Class_Metrics': outer_scores['per_class'],
-        'Per_Fold_Scores': {  # <== ADD THIS
-        'balanced_accuracy': outer_scores['balanced_accuracy'],
-        'auc': outer_scores['auc']
-    }
+        'Per_Fold_Scores': {
+            'balanced_accuracy': outer_scores['balanced_accuracy'],
+            'auc': outer_scores['auc']
+        },
+        'Confusion_Matrices': outer_scores['confusion_matrices'],
+        'Mean_Confusion_Matrix': np.mean(outer_scores['confusion_matrices'], axis=0)
     })
 
     joblib.dump(gs.best_estimator_, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
@@ -185,6 +186,39 @@ for model_name in models:
 # === SAVE RESULTS ===
 results_df = pd.DataFrame(results)
 results_df.to_csv(os.path.join(results_dir, f'{name}_results.csv'), index=False)
+
+# === SAVE AND VISUALIZE CONFUSION MATRICES ===
+plt.figure(figsize=(15, 3))
+for i, res in enumerate(results):
+    plt.subplot(1, 5, i+1)
+    cm = res['Mean_Confusion_Matrix']
+    
+    # Create heatmap
+    import seaborn as sns
+    sns.heatmap(cm, annot=True, fmt='.1f', cmap='Blues', 
+                xticklabels=['No Adverse', 'Adverse'],
+                yticklabels=['No Adverse', 'Adverse'])
+    plt.title(f'{res["Model"]}\nMean Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, f'{name}_confusion_matrices.png'), dpi=300, bbox_inches='tight')
+plt.close()
+
+# Save individual confusion matrices as CSV files
+for res in results:
+    model_name = res['Model']
+    
+    # Save mean confusion matrix
+    cm_df = pd.DataFrame(res['Mean_Confusion_Matrix'], 
+                         index=['Actual_No_Adverse', 'Actual_Adverse'],
+                         columns=['Pred_No_Adverse', 'Pred_Adverse'])
+    cm_df.to_csv(os.path.join(results_dir, f'{name}_{model_name}_mean_confusion_matrix.csv'))
+    
+    # Save all fold confusion matrices
+    fold_cms = np.array(res['Confusion_Matrices'])
+    np.save(os.path.join(results_dir, f'{name}_{model_name}_all_confusion_matrices.npy'), fold_cms)
 
 # === VISUALIZE BALANCED ACCURACY ===
 plt.figure(figsize=(10, 6))

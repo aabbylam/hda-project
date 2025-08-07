@@ -5,26 +5,15 @@ import matplotlib.pyplot as plt
 import joblib   
 
 from sklearn.model_selection import train_test_split, GridSearchCV, KFold
-from sklearn.linear_model import Ridge, Lasso
-from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
-from sklearn.metrics import r2_score, mean_squared_error
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPRegressor
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neural_network import MLPClassifier
-import os
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import joblib
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, mean_absolute_error, mean_squared_error
 
-
-
-name = 'sqs_round2'
+name = 'sqs_round4'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -58,17 +47,22 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round6','insomniaEfficacyMeasure_Round7',
     'insomniaEfficacyMeasure_Round8','insomniaEfficacyMeasure_Round9',
     'insomniaEfficacyMeasure_Round10','insomniaEfficacyMeasure_Round11',
-    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13'
+    'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13','GAD7_Round1_y', 'insomniaEfficacyMeasure_Round1_y'
 ]
 X = full.drop(columns=drop_cols)
-y = full['insomniaEfficacyMeasure_Round2']
+y = full['insomniaEfficacyMeasure_Round4']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='insomniaEfficacyMeasure_Round2'), data['insomniaEfficacyMeasure_Round2']
+X, y = data.drop(columns='insomniaEfficacyMeasure_Round4'), data['insomniaEfficacyMeasure_Round4']
+
+X = X.rename(columns={
+    'GAD7_Round1_x': 'GAD7_Round1',
+    'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'
+})
 
 ## Ordinal Classifier
 from sklearn.base import BaseEstimator
 from sklearn.base import clone
-from sklearn.metrics import accuracy_score
+
 class OrdinalClassifier(BaseEstimator):
 
     def __init__(self, clf):
@@ -120,10 +114,8 @@ class OrdinalClassifier(BaseEstimator):
         _, indexed_y = np.unique(y, return_inverse=True)
         return accuracy_score(indexed_y, self.predict(X), sample_weight=sample_weight)
 
-
 ## using cohens kappa as the target metric - higher is better
 ## ranges from 0 to 1
-
 from sklearn.metrics import make_scorer
 from sklearn.metrics import cohen_kappa_score
 
@@ -136,50 +128,55 @@ def weighted_kappa(y_true, y_pred):
 
 target_metric = make_scorer(weighted_kappa, greater_is_better=True)
 
-
-# Train/test split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-
-
-
 # Define models and parameter grids
 def get_models_and_grids():
     models = {
-        'Ridge' : OrdinalClassifier(LogisticRegression(penalty='l2', solver='lbfgs', C=1.0, max_iter=1000)),
-        'Lasso' : OrdinalClassifier(LogisticRegression(penalty='l1', solver='saga', C=1.0, max_iter=1000)),
-        'RandomForest' : OrdinalClassifier(RandomForestClassifier(random_state=42)),
-        'XGB' : OrdinalClassifier(XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42)),
-        'MLP' : OrdinalClassifier(MLPClassifier(max_iter=1000, random_state=42))
+        'Ridge': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', OrdinalClassifier(LogisticRegression(penalty='l2', solver='lbfgs', C=1.0, max_iter=1000)))
+        ]),
+        'Lasso': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', OrdinalClassifier(LogisticRegression(penalty='l1', solver='saga', C=1.0, max_iter=1000)))
+        ]),
+        'RandomForest': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', OrdinalClassifier(RandomForestClassifier(random_state=42)))
+        ]),
+        'XGB': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', OrdinalClassifier(XGBClassifier(eval_metric='logloss', random_state=42)))
+        ]),
+        'MLP': Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', OrdinalClassifier(MLPClassifier(max_iter=1000, random_state=42)))
+        ])
     }
     
-    # FIXED: Changed 'model__' to 'clf__' to match OrdinalClassifier parameter name
     grids = {
-        'Ridge': {'clf__C': [0.1, 1.0, 10.0]},  # For LogisticRegression, use C instead of alpha
-        'Lasso': {'clf__C': [0.01, 0.1, 1.0]},  # For LogisticRegression, use C instead of alpha
+        'Ridge': {'model__clf__C': [0.1, 1.0, 10.0]},
+        'Lasso': {'model__clf__C': [0.01, 0.1, 1.0]},
         'RandomForest': {
-            'clf__n_estimators': [100, 200, 500],
-            'clf__max_depth': [None, 5, 10, 20],
-            'clf__min_samples_split': [2, 5, 10],
-            'clf__min_samples_leaf': [1, 2, 4],
-            'clf__max_features': ['sqrt', 'log2']  # 'auto' is deprecated, use 'sqrt'
+            'model__clf__n_estimators': [100, 200, 500],
+            'model__clf__max_depth': [None, 5, 10, 20],
+            'model__clf__min_samples_split': [2, 5, 10],
+            'model__clf__min_samples_leaf': [1, 2, 4],
+            'model__clf__max_features': ['sqrt', 'log2']  # Removed 'auto'
         },
         'XGB': {
-            'clf__n_estimators': [100, 200, 300],
-            'clf__max_depth': [3, 6, 9, 12],
-            'clf__learning_rate': [0.001, 0.01, 0.1, 0.2],
-            'clf__subsample': [0.6, 0.8, 1.0],
-            'clf__colsample_bytree': [0.6, 0.8, 1.0]
+            'model__clf__n_estimators': [100, 200, 300],
+            'model__clf__max_depth': [3, 6, 9, 12],
+            'model__clf__learning_rate': [0.001, 0.01, 0.1, 0.2],
+            'model__clf__subsample': [0.6, 0.8, 1.0],
+            'model__clf__colsample_bytree': [0.6, 0.8, 1.0]
         },
         'MLP': {
-            'clf__hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (200, 100, 50), (300, 200, 100), (100, 100, 50, 25)],
-            'clf__activation': ['relu', 'tanh'],
-            'clf__solver': ['adam', 'sgd'],
-            'clf__alpha': [1e-5, 1e-4, 1e-3],
-            'clf__learning_rate_init': [1e-3, 1e-2],
-            'clf__batch_size': [32, 64, 128, 256]
+            'model__clf__hidden_layer_sizes': [(50,), (100,), (100, 50), (200, 100), (200, 100, 50), (300, 200, 100), (100, 100, 50, 25)],
+            'model__clf__activation': ['relu', 'tanh'],
+            'model__clf__solver': ['adam', 'sgd'],
+            'model__clf__alpha': [1e-5, 1e-4, 1e-3],
+            'model__clf__learning_rate_init': [1e-3, 1e-2],
+            'model__clf__batch_size': [32, 64, 128, 256]
         }
     }
 
@@ -191,28 +188,41 @@ models, grids = get_models_and_grids()
 outer_cv = KFold(n_splits=5, shuffle=True, random_state=1)
 inner_cv = KFold(n_splits=5, shuffle=True, random_state=2)
 ensemble_results = {}
-fold_kappa = {m: [] for m in models}  # Changed to track kappa instead of r2/mse
+fold_kappa = {m: [] for m in models}
+fold_mse = {m: [] for m in models}  # Added to match EQ5D script
+fold_mae = {m: [] for m in models}  # Added to match EQ5D script
 
 for model_name, pipe in models.items():
     print(f"Training {model_name}...")
     gs = GridSearchCV(pipe, grids[model_name], cv=inner_cv, scoring=target_metric, n_jobs=-1)
-    kappas = []
     
     for tr_idx, te_idx in outer_cv.split(X):
         gs.fit(X.iloc[tr_idx], y.iloc[tr_idx])
         preds = gs.predict(X.iloc[te_idx])
+        
+        # Calculate all metrics to match EQ5D script
         kappa = weighted_kappa(y.iloc[te_idx], preds)
-        kappas.append(kappa)
+        mse = mean_squared_error(y.iloc[te_idx], preds)
+        mae = mean_absolute_error(y.iloc[te_idx], preds)
+        
         fold_kappa[model_name].append(kappa)
+        fold_mse[model_name].append(mse)
+        fold_mae[model_name].append(mae)
     
     ensemble_results[model_name] = {
         'best_params': gs.best_params_,
-        'kappa_mean': np.mean(kappas),
-        'kappa_std': np.std(kappas)
+        'kappa_mean': np.mean(fold_kappa[model_name]),
+        'kappa_std': np.std(fold_kappa[model_name]),
+        'mse_mean': np.mean(fold_mse[model_name]),
+        'mse_std': np.std(fold_mse[model_name]),
+        'mse_se': np.std(fold_mse[model_name])/np.sqrt(len(fold_mse[model_name])),  # Standard error
+        'mae_mean': np.mean(fold_mae[model_name]),
+        'mae_std': np.std(fold_mae[model_name]),
+        'mae_se': np.std(fold_mae[model_name])/np.sqrt(len(fold_mae[model_name]))   # Standard error
     }
-    print(f"{model_name} - Kappa: {np.mean(kappas):.4f} ± {np.std(kappas):.4f}")
+    print(f"{model_name} - Kappa: {np.mean(fold_kappa[model_name]):.4f} ± {np.std(fold_kappa[model_name]):.4f}")
 
-# Save results to CSV
+# Save comprehensive results to CSV
 results_df = pd.DataFrame.from_dict(ensemble_results, orient='index')
 results_df.index.name = 'Model'
 results_df.reset_index(inplace=True)
@@ -221,60 +231,182 @@ results_df.to_csv(os.path.join(results_dir, f'{name}_results.csv'), index=False)
 # Re-fit each model on full data and save pipeline
 for model_name, pipe in models.items():
     best_params = ensemble_results[model_name]['best_params']
-    # FIXED: Remove the model__ prefix manipulation since we're using clf__ directly
     final_pipe = pipe.set_params(**best_params)
     final_pipe.fit(X, y)
     joblib.dump(final_pipe, os.path.join(models_dir, f'{name}_{model_name}.pkl'))
 
-# Test set evaluation
-from sklearn.metrics import mean_absolute_error, mean_squared_error, classification_report
+# 1. Performance Comparison Plot (MAE and MSE with standard error)
+plt.figure(figsize=(10, 5))
+x = np.arange(len(results_df))
+width = 0.35 
 
-metrics = []
-for model_name in models:
-    pipe_path = os.path.join(models_dir, f'{name}_{model_name}.pkl')
-    final_pipe = joblib.load(pipe_path)
-    preds = final_pipe.predict(X_test)
-    
-    metrics.append({
-        'Model': model_name,
-        'Kappa': weighted_kappa(y_test, preds),
-        'MAE': mean_absolute_error(y_test, preds),
-        'MSE': mean_squared_error(y_test, preds)
-    })
-    
-    print(f"\n{model_name} Classification Report:")
-    print(classification_report(y_test, preds))
+# Use a professional color palette
+colors = ['#4e79a7', '#f28e2b']  # Blue for MAE, orange for MSE
 
-metrics_df = pd.DataFrame(metrics)
-metrics_csv = os.path.join(fig_dir, f'{name}_model_metrics.csv')
-metrics_df.to_csv(metrics_csv, index=False)
+# MAE plot with standard error
+plt.bar(x - width/2, results_df['mae_mean'], width, 
+        yerr=results_df['mae_se'], capsize=5,
+        color=colors[0], label='MAE')
 
-# Plotting
-fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+# MSE plot with standard error
+plt.bar(x + width/2, results_df['mse_mean'], width,
+        yerr=results_df['mse_se'], capsize=5,
+        color=colors[1], label='MSE')
 
-# Kappa comparison
-axes[0].bar(metrics_df['Model'], metrics_df['Kappa'])
+plt.xticks(x, results_df['Model'], rotation=45, ha='right')
+plt.ylabel('Error Value')
+plt.title(f'{name}: Model Performance Comparison (5-fold CV)')
+plt.legend()
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, f'{name}_error_comparison.png'),
+           dpi=300, bbox_inches='tight')
+plt.close()
+
+# 2. Updated Distribution Boxplots
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))  # Three subplots for Kappa, MSE, MAE
+
+# Professional boxplot styling
+boxprops = dict(linewidth=1.5, facecolor='white')
+medianprops = dict(color='black', linewidth=2)
+whiskerprops = dict(linewidth=1.5)
+capprops = dict(linewidth=1.5)
+
+# Define colors for each metric
+metric_colors = ['#59a14f', '#e15759', '#76b7b2']  # Green, red, teal
+
+# Kappa Distribution
+axes[0].boxplot(
+    [fold_kappa[m] for m in models.keys()],
+    labels=models.keys(),
+    boxprops=boxprops,
+    medianprops=medianprops,
+    whiskerprops=whiskerprops,
+    capprops=capprops,
+    patch_artist=True
+)
+# Set color for each model's box
+for i, box in enumerate(axes[0].artists):
+    box.set_facecolor(metric_colors[0])
 axes[0].set_ylabel('Cohen\'s Kappa')
-axes[0].set_title(f'{name}: Cohen\'s Kappa by Model')
-axes[0].tick_params(axis='x', rotation=45)
+axes[0].set_title('Kappa Distribution Across Folds')
 
-# MAE vs MSE
-x, w = np.arange(len(metrics_df)), 0.35
-axes[1].bar(x - w/2, metrics_df['MAE'], w, label='MAE')
-axes[1].bar(x + w/2, metrics_df['MSE'], w, label='MSE')
-axes[1].set_xticks(x)
-axes[1].set_xticklabels(metrics_df['Model'], rotation=45, ha='right')
-axes[1].set_ylabel('Error')
-axes[1].set_title(f'{name}: MAE vs MSE by Model')
-axes[1].legend()
+# MSE Distribution
+axes[1].boxplot(
+    [fold_mse[m] for m in models.keys()],
+    labels=models.keys(),
+    boxprops=boxprops,
+    medianprops=medianprops,
+    whiskerprops=whiskerprops,
+    capprops=capprops,
+    patch_artist=True
+)
+for i, box in enumerate(axes[1].artists):
+    box.set_facecolor(metric_colors[1])
+axes[1].set_ylabel('MSE')
+axes[1].set_title('MSE Distribution Across Folds')
 
-# CV Kappa distributions
-kappa_box = pd.DataFrame(fold_kappa)
-kappa_box.plot.box(ax=axes[2])
-axes[2].set_ylabel('Cohen\'s Kappa')
-axes[2].set_title('CV Kappa Distributions')
+# MAE Distribution
+axes[2].boxplot(
+    [fold_mae[m] for m in models.keys()],
+    labels=models.keys(),
+    boxprops=boxprops,
+    medianprops=medianprops,
+    whiskerprops=whiskerprops,
+    capprops=capprops,
+    patch_artist=True
+)
+for i, box in enumerate(axes[2].artists):
+    box.set_facecolor(metric_colors[2])
+axes[2].set_ylabel('MAE')
+axes[2].set_title('MAE Distribution Across Folds')
 
 plt.tight_layout()
-fig.savefig(os.path.join(fig_dir, f'{name}_comprehensive_evaluation.png'),
+plt.savefig(os.path.join(fig_dir, f'{name}_cv_distributions.png'),
+           dpi=300, bbox_inches='tight')
+plt.close()
+
+# 3. MSE Comparison Bar Plot
+plt.figure(figsize=(10, 6))
+
+# Prepare MSE data (convert from your fold_mse dictionary)
+mse_means = [np.mean(fold_mse[model]) for model in models.keys()]
+mse_stds = [np.std(fold_mse[model]) for model in models.keys()]
+model_names = list(models.keys())
+
+# Custom colors - use your preferred palette
+colors = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f']
+
+# Create the bar plot with error bars
+bars = plt.bar(model_names, mse_means, 
+               yerr=mse_stds,
+               capsize=10,
+               color=colors,
+               width=0.6)
+
+# Custom styling
+plt.ylabel('Mean Squared Error (MSE)', fontsize=12, labelpad=10)
+plt.title('Cross-Validated MSE by Model', fontsize=14, pad=20)
+plt.xticks(fontsize=11)
+plt.yticks(fontsize=11)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Add value labels on top of bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{height:.4f}',
+             ha='center', va='bottom', fontsize=10)
+
+# Adjust y-axis limits based on your data range
+plt.ylim(min(mse_means)*0.98, max(mse_means)*1.02)  # 2% padding
+
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, f'{name}_mse_comparison.png'), 
             dpi=300, bbox_inches='tight')
-plt.close(fig)
+plt.close()
+
+# 4. Kappa Comparison Bar Plot (replaces R² plot)
+plt.figure(figsize=(10, 6))
+
+# Prepare Kappa data
+kappa_means = [np.mean(fold_kappa[model]) for model in models.keys()]
+kappa_stds = [np.std(fold_kappa[model]) for model in models.keys()]
+model_names = list(models.keys())
+
+# Custom colors (reuse same palette for consistency)
+colors = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f']
+
+# Create the bar plot with error bars
+bars = plt.bar(model_names, kappa_means,
+               yerr=kappa_stds,
+               capsize=10,
+               color=colors,
+               width=0.6)
+
+# Custom styling
+plt.ylabel('Cohen\'s Kappa (Mean)', fontsize=12, labelpad=10)
+plt.title('Cross-Validated Cohen\'s Kappa by Model', fontsize=14, pad=20)
+plt.xticks(fontsize=11)
+plt.yticks(fontsize=11)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Add value labels on top of bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{height:.4f}',
+             ha='center', va='bottom', fontsize=10)
+
+# Adjust y-axis limits
+if kappa_means:  # Check if we have data
+    plt.ylim(min(kappa_means)*0.98, max(kappa_means)*1.02)
+
+plt.tight_layout()
+plt.savefig(os.path.join(fig_dir, f'{name}_kappa_comparison.png'),
+            dpi=300, bbox_inches='tight')
+plt.close()
+
+print("Nested CV completed successfully!")
+print(f"Results saved to: {results_dir}")
+print(f"Figures saved to: {fig_dir}")
+print(f"Models saved to: {models_dir}")
