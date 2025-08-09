@@ -17,7 +17,7 @@ from sklearn.metrics import (
 )
 
 # === SETUP ===
-name = 'any_adverse_binary'
+name = 'severe_adverse_binary'
 base_dir = '/rds/general/user/hsl121/home/hda_project/adverse/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -28,7 +28,7 @@ os.makedirs(models_dir, exist_ok=True)
 # === LOAD DATA ===
 eq5d = pd.read_csv('../rq1/rq1_cleaned_no_ae.csv')
 scores = pd.read_excel('../data/Scores 6 Jan 2025_Prescribed_Completed Baseline PROMs.xlsx')
-df = pd.read_csv('../rq1/rq1_cleaned_adverse_binary.csv')
+df = pd.read_csv('../rq1/rq1_cleaned_adverse_severe.csv')
 
 # === MERGE PROMs ===
 gad7 = scores[scores['promName']=='GAD7'][['SID','Round','total_score']]
@@ -43,7 +43,7 @@ ins_wide.columns = [f"insomniaEfficacyMeasure_Round{r}" for r in ins_wide.column
 ins_wide = ins_wide.reset_index()
 
 full = pd.merge(gad7, ins_wide, on='SID', how='left')
-full['adverse_binary'] = df['adverse_binary'].astype(int)
+full['severe_adverse_binary'] = df['severe_adverse_binary'].astype(int)
 
 # === CLEAN DATA ===
 drop_cols = ['SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD7_Round6','GAD7_Round7',
@@ -56,16 +56,16 @@ drop_cols = ['SID', 'GAD7_Round2','GAD7_Round3','GAD7_Round4','GAD7_Round5','GAD
 ]
 
 X = full.drop(columns=drop_cols)
-y=full['adverse_binary']
+y=full['severe_adverse_binary']
 
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='adverse_binary'), data['adverse_binary']
+X, y = data.drop(columns='severe_adverse_binary'), data['severe_adverse_binary']
 X = X.rename(columns={
     'GAD7_Round1_x': 'GAD7_Round1',
     'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'
 })
 
-y = data.loc[:, 'adverse_binary'].iloc[:, 0] 
+y = data.loc[:, 'severe_adverse_binary'].iloc[:, 0] 
 
 # === CLASS WEIGHTS ===
 n_pos = sum(y == 1)

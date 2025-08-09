@@ -13,7 +13,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, mean_absolute_error, mean_squared_error
 
-name = 'sqs_round4'
+name = 'sqs_round2'
 base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol/results'
 results_dir = os.path.join(base_dir, name)
 fig_dir = os.path.join(results_dir, 'figures')
@@ -50,9 +50,9 @@ drop_cols = [
     'insomniaEfficacyMeasure_Round12','insomniaEfficacyMeasure_Round13','GAD7_Round1_y', 'insomniaEfficacyMeasure_Round1_y'
 ]
 X = full.drop(columns=drop_cols)
-y = full['insomniaEfficacyMeasure_Round4']
+y = full['insomniaEfficacyMeasure_Round2']
 data = pd.concat([X, y], axis=1).dropna()
-X, y = data.drop(columns='insomniaEfficacyMeasure_Round4'), data['insomniaEfficacyMeasure_Round4']
+X, y = data.drop(columns='insomniaEfficacyMeasure_Round2'), data['insomniaEfficacyMeasure_Round2']
 
 X = X.rename(columns={
     'GAD7_Round1_x': 'GAD7_Round1',

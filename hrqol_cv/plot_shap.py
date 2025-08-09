@@ -8,7 +8,7 @@ from matplotlib.lines import Line2D
 
 # --- Your existing setup code ---
 name = 'eq5d_round2'
-base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol_cv/results'
+base_dir = '/rds/general/user/hsl121/home/hda_project/hrqol/results'
 models_dir = os.path.join(base_dir, name, 'models')
 fig_dir = os.path.join(base_dir, name, 'figures_shap')
 os.makedirs(fig_dir, exist_ok=True)
@@ -46,16 +46,15 @@ y = full['EQ5D_Round2']
 data = pd.concat([X, y], axis=1).dropna()
 X, y = data.drop(columns='EQ5D_Round2'), data['EQ5D_Round2']
 
-X=X.rename(columns={
+X = X.rename(columns={
     'GAD7_Round1_x': 'GAD7_Round1',
     'insomniaEfficacyMeasure_Round1_x': 'insomniaEfficacyMeasure_Round1'})
-
 
 # --- New: Initialize storage for comparison ---
 shap_results = {}
 summary_table = pd.DataFrame()
 
-# --- Your existing model loop (modified) ---
+# --- Your existing model loop (modified with fix) ---
 for file in os.listdir(models_dir):
     if not file.endswith('.pkl') or name not in file:
         continue
@@ -77,15 +76,12 @@ for file in os.listdir(models_dir):
     if 'RandomForest' in model_name or 'XGB' in model_name:
         explainer = shap.TreeExplainer(core_model)
         shap_values = explainer.shap_values(X_scaled)
-        class_idx = 1 if isinstance(shap_values, list) else 0
     elif 'Ridge' in model_name or 'Lasso' in model_name:
         explainer = shap.LinearExplainer(core_model, X_scaled)
         shap_values = explainer.shap_values(X_scaled)
-        class_idx = 1 if shap_values.ndim == 3 else 0
     else:  # fallback for MLP or unsupported models
-        explainer = shap.KernelExplainer(core_model.predict_proba, shap.sample(X_scaled, 100))
+        explainer = shap.KernelExplainer(core_model.predict, shap.sample(X_scaled, 100))
         shap_values = explainer.shap_values(X_scaled[:100])
-        class_idx = 1
 
     # Feature names
     if isinstance(X, pd.DataFrame):
@@ -93,24 +89,57 @@ for file in os.listdir(models_dir):
     else:
         feature_names = [f'Feature {i}' for i in range(X.shape[1])]
 
-    # --- Your existing plots ---
+    # --- FIXED: Handle different SHAP value structures ---
+    # Determine the correct SHAP values to use
+    if isinstance(shap_values, list):
+        # Multi-class classification - use class 1 (positive class)
+        if len(shap_values) > 1:
+            plot_shap_values = shap_values[1]
+        else:
+            plot_shap_values = shap_values[0]
+    else:
+        # Regression or binary classification
+        plot_shap_values = shap_values
+
+    # Ensure we have a 2D array for plotting
+    if plot_shap_values.ndim == 1:
+        # If 1D, reshape to 2D (single sample case)
+        plot_shap_values = plot_shap_values.reshape(1, -1)
+        X_plot = X_scaled[:1] if len(X_scaled.shape) == 2 else X_scaled.reshape(1, -1)
+    else:
+        X_plot = X_scaled
+
+    print(f"SHAP values shape: {plot_shap_values.shape}")
+    print(f"X_plot shape: {X_plot.shape}")
+
+    # --- Your existing plots (with fixed SHAP values) ---
     # Summary bar plot
-    shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, plot_type='bar', show=False)
-    plt.title(f"SHAP Feature Importance: {model_name}")
-    plt.tight_layout()
-    plt.savefig(os.path.join(fig_dir, f'shap_bar_{model_name}.png'), dpi=300)
-    plt.close()
+    try:
+        shap.summary_plot(plot_shap_values, X_plot, feature_names=feature_names, plot_type='bar', show=False)
+        plt.title(f"SHAP Feature Importance: {model_name}")
+        plt.tight_layout()
+        plt.savefig(os.path.join(fig_dir, f'shap_bar_{model_name}.png'), dpi=300)
+        plt.close()
+    except Exception as e:
+        print(f"Error creating bar plot for {model_name}: {e}")
 
     # Full summary dot plot
-    shap.summary_plot(shap_values[class_idx], X_scaled, feature_names=feature_names, show=False)
-    plt.title(f"SHAP Summary: {model_name}")
-    plt.tight_layout()
-    plt.savefig(os.path.join(fig_dir, f'shap_summary_{model_name}.png'), dpi=300)
-    plt.close()
+    try:
+        shap.summary_plot(plot_shap_values, X_plot, feature_names=feature_names, show=False)
+        plt.title(f"SHAP Summary: {model_name}")
+        plt.tight_layout()
+        plt.savefig(os.path.join(fig_dir, f'shap_summary_{model_name}.png'), dpi=300)
+        plt.close()
+    except Exception as e:
+        print(f"Error creating summary plot for {model_name}: {e}")
 
     # --- New: Store SHAP results for comparison ---
+    # Calculate mean absolute SHAP values for comparison
     if isinstance(shap_values, list):
-        mean_shap = np.abs(shap_values[class_idx]).mean(axis=0)
+        if len(shap_values) > 1:
+            mean_shap = np.abs(shap_values[1]).mean(axis=0)
+        else:
+            mean_shap = np.abs(shap_values[0]).mean(axis=0)
     else:
         mean_shap = np.abs(shap_values).mean(axis=0)
     
@@ -120,47 +149,5 @@ for file in os.listdir(models_dir):
 # --- New: Comparative Analysis Section ---
 # 1. Save summary table to CSV
 summary_table.to_csv(os.path.join(fig_dir, 'shap_comparison_table.csv'))
-
-# 2. Create comparative bar plot
-plt.figure(figsize=(14, 8))
-top_n = 15  # Number of top features to show
-
-# Get top features across all models
-all_features = set()
-for model in shap_results:
-    all_features.update(shap_results[model].nlargest(top_n).index.tolist())
-
-# Prepare data for plotting
-plot_data = pd.DataFrame()
-for feature in all_features:
-    for model in shap_results:
-        plot_data.loc[feature, model] = shap_results[model].get(feature, 0)
-
-# Normalize to percentage of max importance per model
-plot_data = (plot_data / plot_data.max()) * 100
-
-# Sort by total importance
-plot_data = plot_data.loc[plot_data.sum(axis=1).sort_values(ascending=False).index]
-
-# Plot
-colors = plt.cm.tab20.colors
-ax = plot_data.plot(kind='barh', width=0.8, color=colors, figsize=(14, 10))
-plt.title('Comparative Feature Importance Across Models', fontsize=14)
-plt.xlabel('Normalized SHAP Importance (%)', fontsize=12)
-plt.ylabel('Features', fontsize=12)
-plt.legend(title='Models', bbox_to_anchor=(1.05, 1), loc='upper left')
-plt.grid(axis='x', linestyle='--', alpha=0.6)
-
-# Add value labels for the top 3 models per feature
-for i, (idx, row) in enumerate(plot_data.iterrows()):
-    top_models = row.nlargest(3)
-    for j, (model, val) in enumerate(top_models.items()):
-        if val > 5:  # Only label significant values
-            ax.text(val + 1, i - 0.1 + j*0.1, f"{model}: {val:.1f}%", 
-                   ha='left', va='center', fontsize=9)
-
-plt.tight_layout()
-plt.savefig(os.path.join(fig_dir, 'comparative_shap_importance.png'), dpi=300, bbox_inches='tight')
-plt.close()
-
-print("All plots and comparison table saved successfully!")
+shap_results_df = pd.DataFrame(shap_results)
+shap_results_df.to_csv(os.path.join(fig_dir, 'shap_results_summary.csv'))

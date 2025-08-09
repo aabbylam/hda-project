@@ -1,0 +1,1230 @@
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+324 fits failed out of a total of 972.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+65 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+259 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.50106965 0.50047068 0.49996793
+ 0.50206287 0.50266183 0.50156204 0.5147193  0.51283656 0.51520227
+ 0.50839205 0.50729225 0.50559157 0.51325347 0.51386087 0.51053134
+ 0.52548531 0.52507876 0.52596635 0.54972158 0.5506374  0.55424347
+ 0.54972158 0.5506374  0.55424347 0.55719031 0.55401996 0.55770226
+ 0.50053482 0.5        0.5        0.50130356 0.50123942 0.50133563
+ 0.51665389 0.51640962 0.51493343 0.53484672 0.52985434 0.52891489
+ 0.53037036 0.53571743 0.53109184 0.55247963 0.55331344 0.55381812
+ 0.59439008 0.59548795 0.59259703 0.59439008 0.59548795 0.59259703
+ 0.59663116 0.59654532 0.59563794        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.66301603 0.66584474 0.66444783 0.66373001 0.6680349  0.66491659
+ 0.66298204 0.66632386 0.66519678 0.66498171 0.66613988 0.66564384
+ 0.66406205 0.66601353 0.66541935 0.66370929 0.66661249 0.66516471
+ 0.66622113 0.66638992 0.66601639 0.66622113 0.66638992 0.66601639
+ 0.66409412 0.66620787 0.66409506 0.65768875 0.65975354 0.65808109
+ 0.66174187 0.65869426 0.65852814 0.66357927 0.65960258 0.65966193
+ 0.65895082 0.65839527 0.65905453 0.66020154 0.65863012 0.65809145
+ 0.66423009 0.65865277 0.65893661 0.66094013 0.65838585 0.65789059
+ 0.66094013 0.65838585 0.65789059 0.6622285  0.65977235 0.65685494
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.6515882  0.65208439 0.65025543
+ 0.65543296 0.65531964 0.65212588 0.65158266 0.65461316 0.65495941
+ 0.65124485 0.64981301 0.64950554 0.65616868 0.65739577 0.65404261
+ 0.6514127  0.65155613 0.65526782 0.65605081 0.65476413 0.65714404
+ 0.65605081 0.65476413 0.65714404 0.65556015 0.65139582 0.65730805
+ 0.65202694 0.65132524 0.65180629 0.65770628 0.66225446 0.6564008
+ 0.65923892 0.65810612 0.65987187 0.65545464 0.65863611 0.65733832
+ 0.66264296 0.65736945 0.65850226 0.66081422 0.65650933 0.66013786
+ 0.66069443 0.66088108 0.65978799 0.66069443 0.66088108 0.65978799
+ 0.6610178  0.66238376 0.66419754        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.52760195 0.53086543 0.52839526 0.54243627 0.53892468 0.53873418
+ 0.55396524 0.55331442 0.55190814 0.54240785 0.54175896 0.54038282
+ 0.54547525 0.54509885 0.54447551 0.5653613  0.56130912 0.56030746
+ 0.57429816 0.57652424 0.57314285 0.57429816 0.57652424 0.57314285
+ 0.58223199 0.58104059 0.5774996  0.53230571 0.53610517 0.53245494
+ 0.54390191 0.54628548 0.54550638 0.56619131 0.57144526 0.56733738
+ 0.57520648 0.56979719 0.57166666 0.57522935 0.57115087 0.57243924
+ 0.58200254 0.58769585 0.58765168 0.60739529 0.60991366 0.61337916
+ 0.60739529 0.60991366 0.61337916 0.60950903 0.61160205 0.60997128]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+324 fits failed out of a total of 972.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+113 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+211 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.50040462 0.49993586 0.50053482
+ 0.50378986 0.50249764 0.50259577 0.51568965 0.51453781 0.51128278
+ 0.50942653 0.50790983 0.50936432 0.51006507 0.50806174 0.50812588
+ 0.53163393 0.53149797 0.52942473 0.55931016 0.55960071 0.55506941
+ 0.55931016 0.55960071 0.55506941 0.56196356 0.55839608 0.560824
+ 0.5        0.5        0.5        0.50479536 0.50312867 0.50501985
+ 0.51384264 0.51547534 0.5166072  0.53637552 0.53706685 0.5335449
+ 0.53076613 0.5331639  0.53235081 0.55104086 0.55241315 0.55442801
+ 0.59267806 0.59646425 0.59091975 0.59267806 0.59646425 0.59091975
+ 0.59348922 0.59534641 0.59089903        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.66977816 0.66685133 0.66659575 0.66865572 0.66698711 0.66545352
+ 0.67034027 0.66897642 0.66617884 0.66890285 0.6662203  0.66577422
+ 0.66926504 0.66822939 0.66621091 0.67237201 0.66932918 0.66561195
+ 0.66992815 0.66940753 0.66561195 0.66992815 0.66940753 0.66561195
+ 0.67408498 0.66893492 0.66690416 0.66055525 0.65737936 0.65898289
+ 0.65873571 0.65718502 0.65854619 0.65975158 0.65584554 0.65747463
+ 0.65851122 0.65869328 0.65919701 0.65920639 0.65649176 0.65992425
+ 0.66094758 0.65615588 0.65813773 0.66007036 0.65692654 0.65807167
+ 0.66007036 0.65692654 0.65807167 0.66105416 0.65724723 0.65794339
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.65059919 0.64713753 0.64414848
+ 0.64842613 0.64762533 0.6451974  0.65250752 0.65085119 0.64473806
+ 0.64845534 0.65037952 0.64633311 0.64761402 0.64561989 0.64404941
+ 0.65331582 0.64937308 0.64606141 0.65116903 0.64968726 0.64857133
+ 0.65116903 0.64968726 0.64857133 0.64619433 0.64774404 0.64866946
+ 0.64820444 0.65268773 0.64943368 0.6570322  0.65456569 0.65496089
+ 0.65875369 0.65387632 0.65470264 0.65236998 0.6538857  0.65608337
+ 0.66110782 0.6593987  0.65657384 0.65498938 0.65673615 0.65833022
+ 0.66040041 0.6605118  0.66127398 0.66040041 0.6605118  0.66127398
+ 0.65946021 0.66106927 0.6612571         nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.52979386 0.52586611 0.52693768 0.54204909 0.5415304  0.54152463
+ 0.55292552 0.55242084 0.55691163 0.54880938 0.54685674 0.54658808
+ 0.54054008 0.54509192 0.54942889 0.56572518 0.56268888 0.56427338
+ 0.57921909 0.57493857 0.57721459 0.57921909 0.57493857 0.57721459
+ 0.57929457 0.58125181 0.57923695 0.52730372 0.52582101 0.52924867
+ 0.5513608  0.54891694 0.54428558 0.56866336 0.56982345 0.5688095
+ 0.5720853  0.57267677 0.57025921 0.57164495 0.57252026 0.57671685
+ 0.582241   0.58569998 0.59107185 0.59767338 0.60779912 0.60917333
+ 0.59767338 0.60779912 0.60917333 0.61333208 0.60967417 0.61233408]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+324 fits failed out of a total of 972.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+69 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+255 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.50046876 0.50046876 0.49990379
+ 0.50208918 0.50159026 0.50225145 0.51506822 0.51325347 0.511649
+ 0.51257902 0.51094633 0.5083062  0.51641708 0.51012287 0.51210834
+ 0.53225479 0.52747921 0.52830843 0.55773719 0.56139319 0.55450387
+ 0.55773719 0.56139319 0.55450387 0.56399646 0.56453973 0.56169241
+ 0.49996793 0.49996793 0.49996793 0.50165633 0.50115357 0.50058668
+ 0.51738189 0.51713954 0.51689334 0.52949215 0.52823852 0.52991482
+ 0.53793891 0.53321594 0.53439216 0.55622433 0.55406525 0.55072995
+ 0.59527865 0.59159269 0.59377902 0.59527865 0.59159269 0.59377902
+ 0.59879793 0.59774057 0.59492223        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.65487825 0.65885491 0.6585607  0.65570363 0.6581918  0.66177616
+ 0.65683741 0.65973406 0.65792409 0.6561309  0.66018111 0.66063201
+ 0.65542536 0.65983871 0.66001518 0.65652342 0.65980012 0.65981334
+ 0.65894656 0.65735147 0.65926623 0.65894656 0.65735147 0.65926623
+ 0.65908712 0.658091   0.66034817 0.6469861  0.6465646  0.64981213
+ 0.64707387 0.64464327 0.64942921 0.64834728 0.64524223 0.64675049
+ 0.65007426 0.64545444 0.64996211 0.64731622 0.6458072  0.649333
+ 0.64884811 0.64574499 0.64618552 0.64811895 0.64706927 0.64851147
+ 0.64811895 0.64706927 0.64851147 0.64758797 0.64656844 0.64662029
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.65006113 0.65108352 0.65129765
+ 0.6504959  0.65111559 0.65153156 0.65012531 0.6485794  0.65042332
+ 0.65481406 0.65033363 0.65009512 0.65191662 0.65392933 0.65077801
+ 0.65342282 0.65235121 0.65113542 0.65482906 0.65548734 0.65399427
+ 0.65482906 0.65548734 0.65399427 0.65265024 0.65437643 0.65594499
+ 0.64863402 0.64842739 0.65015822 0.65228889 0.65162771 0.65440071
+ 0.65221439 0.65313405 0.65355095 0.65197855 0.65365945 0.6533086
+ 0.65209839 0.65189561 0.65360473 0.6546168  0.6513003  0.65694945
+ 0.65237572 0.65471395 0.65716456 0.65237572 0.65471395 0.65716456
+ 0.65454136 0.65313967 0.65572236        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.53799442 0.53428081 0.53551465 0.54485074 0.54764737 0.54507715
+ 0.56513315 0.55698828 0.56119313 0.55039505 0.55345401 0.54989614
+ 0.55254569 0.55308895 0.55278054 0.56857966 0.5665867  0.56762428
+ 0.57508588 0.57803461 0.58192068 0.57508588 0.57803461 0.58192068
+ 0.58373257 0.58030317 0.58338458 0.5347129  0.53590699 0.53587684
+ 0.55288233 0.54677304 0.55104395 0.56595356 0.56463696 0.56631401
+ 0.56750523 0.56865707 0.57226679 0.57930399 0.57915785 0.57527371
+ 0.58530135 0.58656609 0.58888552 0.60720095 0.60841116 0.60721516
+ 0.60720095 0.60841116 0.60721516 0.60786696 0.61029296 0.60625498]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+324 fits failed out of a total of 972.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+260 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+64 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.50050083 0.5        0.49996793
+ 0.5015582  0.50108943 0.50011599 0.51715122 0.51385568 0.51451878
+ 0.50975549 0.50948107 0.50801256 0.5117402  0.51017164 0.5091982
+ 0.53179636 0.53293015 0.53149179 0.55236779 0.55303089 0.55398646
+ 0.55236779 0.55303089 0.55398646 0.55787234 0.55650005 0.55676045
+ 0.49996793 0.5        0.5        0.50162041 0.50061875 0.50068289
+ 0.52224731 0.51672395 0.51783411 0.53151158 0.53242087 0.53277748
+ 0.53369312 0.5326613  0.5346101  0.55964368 0.55402679 0.55371838
+ 0.59216254 0.59597889 0.5886548  0.59216254 0.59597889 0.5886548
+ 0.59176542 0.5927473  0.59505154        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.65972754 0.66338143 0.66351065 0.65871744 0.66262404 0.66282317
+ 0.6602378  0.66257219 0.66150925 0.65845896 0.66350319 0.6623402
+ 0.66107353 0.6655791  0.66288538 0.66086691 0.66420296 0.66304381
+ 0.66060477 0.66153845 0.66314386 0.66060477 0.66153845 0.66314386
+ 0.66018402 0.66241184 0.6616356  0.6524697  0.65511808 0.65258837
+ 0.65343179 0.65404477 0.6503907  0.65398832 0.65663478 0.6533014
+ 0.65137853 0.65398256 0.65002007 0.65220198 0.65349017 0.65103209
+ 0.6537742  0.65582169 0.65396451 0.65219143 0.65566134 0.65398621
+ 0.65219143 0.65566134 0.65398621 0.65253384 0.6569432  0.6540805
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.64450517 0.6449872  0.64270636
+ 0.63939585 0.64076046 0.64372973 0.65285151 0.65159329 0.6489353
+ 0.6413387  0.64367886 0.6423271  0.65432287 0.65246761 0.64408348
+ 0.65034177 0.65195182 0.64887767 0.65578893 0.65558208 0.65168199
+ 0.65578893 0.65558208 0.65168199 0.65174233 0.65341286 0.65129045
+ 0.65883621 0.65378603 0.65117816 0.65278727 0.65330404 0.65538858
+ 0.66055555 0.6559121  0.65428592 0.65698559 0.65379277 0.65244294
+ 0.65706107 0.65730052 0.65227799 0.65503295 0.65489815 0.65590825
+ 0.65997102 0.66011524 0.65816645 0.65997102 0.66011524 0.65816645
+ 0.6567091  0.65798805 0.65757592        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.54059186 0.53819985 0.53931193 0.54616998 0.54897698 0.54397883
+ 0.55722059 0.55616322 0.55850338 0.54534461 0.54928539 0.545986
+ 0.55123208 0.54985978 0.54867414 0.56473691 0.56101696 0.56232338
+ 0.57058964 0.57725044 0.5735785  0.57058964 0.57725044 0.5735785
+ 0.57355586 0.5747415  0.57782292 0.53183691 0.53328948 0.53143229
+ 0.55187521 0.54865994 0.54693103 0.56895962 0.56786751 0.56685548
+ 0.56665538 0.56709591 0.56828999 0.57210348 0.57103191 0.57001988
+ 0.58331425 0.58577424 0.58362477 0.60146141 0.60406947 0.60294337
+ 0.60146141 0.60406947 0.60294337 0.6057738  0.60684153 0.60356019]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py:528: FitFailedWarning: 
+324 fits failed out of a total of 972.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+188 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'sqrt', 'log2'} or None. Got 'auto' instead.
+
+--------------------------------------------------------------------------------
+136 fits failed with the following error:
+Traceback (most recent call last):
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_validation.py", line 866, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 1382, in wrapper
+    estimator._validate_params()
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/base.py", line 436, in _validate_params
+    validate_parameter_constraints(
+  File "/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/utils/_param_validation.py", line 98, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_features' parameter of RandomForestClassifier must be an int in the range [1, inf), a float in the range (0.0, 1.0], a str among {'log2', 'sqrt'} or None. Got 'auto' instead.
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/model_selection/_search.py:1108: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.50040465 0.5004367  0.50050084
+ 0.50432474 0.50322494 0.50382391 0.51585023 0.51607665 0.51451001
+ 0.5129178  0.5113473  0.50949854 0.51368919 0.51272154 0.5117218
+ 0.53149404 0.52876924 0.52829276 0.55152583 0.54992139 0.54982133
+ 0.55152583 0.54992139 0.54982133 0.55816617 0.55360476 0.55665983
+ 0.50056497 0.50053291 0.50056497 0.50369758 0.50379378 0.50228358
+ 0.51616444 0.5166313  0.51317158 0.52926429 0.53123947 0.52867761
+ 0.53842886 0.5352358  0.53540838 0.55132573 0.55312072 0.55397624
+ 0.5931939  0.5887409  0.5886691  0.5931939  0.5887409  0.5886691
+ 0.59249682 0.59243268 0.59598474        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.65888711 0.66304563 0.65930283 0.65864714 0.65987052 0.6580915
+ 0.65727853 0.66032702 0.65928936 0.6560608  0.65676805 0.65676528
+ 0.65785578 0.65830009 0.65730207 0.65682956 0.65969595 0.65815556
+ 0.65504415 0.65941954 0.6586904  0.65504415 0.65941954 0.6586904
+ 0.65604582 0.65970815 0.65865829 0.65371456 0.65430506 0.65348471
+ 0.65000669 0.65015852 0.6516718  0.64939182 0.64981996 0.65351869
+ 0.65177339 0.65138854 0.65336858 0.65063958 0.65109989 0.65273944
+ 0.65024738 0.64937105 0.65153965 0.65046713 0.65057842 0.65392325
+ 0.65046713 0.65057842 0.65392325 0.65196206 0.65024438 0.65206416
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan 0.64761741 0.64729307 0.64873331
+ 0.65009719 0.64886076 0.64923524 0.64929191 0.65121032 0.65055863
+ 0.65226762 0.65150732 0.64992846 0.65170854 0.65349666 0.65318356
+ 0.64905239 0.65063863 0.64937659 0.65113028 0.65212724 0.64836858
+ 0.65113028 0.65212724 0.64836858 0.64970696 0.65085102 0.65228285
+ 0.64890747 0.65020165 0.65309457 0.65360087 0.65138532 0.64966798
+ 0.65292033 0.65156201 0.6502765  0.65026583 0.65415778 0.65296648
+ 0.65759647 0.65541686 0.651625   0.65516313 0.6533862  0.65189888
+ 0.65277245 0.6520611  0.65107175 0.65277245 0.6520611  0.65107175
+ 0.65214043 0.65807901 0.65731777        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+        nan        nan        nan        nan        nan        nan
+ 0.54433537 0.53886914 0.53540754 0.54258775 0.54520615 0.5458654
+ 0.56503867 0.55900483 0.55970001 0.55473093 0.54961287 0.5463379
+ 0.54994956 0.55373121 0.55139753 0.56633018 0.56699516 0.56731768
+ 0.5795159  0.58117296 0.57757919 0.5795159  0.58117296 0.57757919
+ 0.58186917 0.58039688 0.58040138 0.53720741 0.53934096 0.53645842
+ 0.55087598 0.54943193 0.54616074 0.56360504 0.57227904 0.56935419
+ 0.57266939 0.57827696 0.57752345 0.57535692 0.57560971 0.57546548
+ 0.59318253 0.59381162 0.58898978 0.6045925  0.61397006 0.61360775
+ 0.6045925  0.61397006 0.61360775 0.61467148 0.60917442 0.61418029]
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/joblib/externals/loky/process_executor.py:782: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/rds/general/user/hsl121/home/anaconda3/envs/TDS/lib/python3.9/site-packages/sklearn/neural_network/_multilayer_perceptron.py:691: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(

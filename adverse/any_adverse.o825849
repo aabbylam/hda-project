@@ -1,0 +1,19 @@
+
+=== Training Ridge ===
+
+=== Training Lasso ===
+
+=== Training RandomForest ===
+
+=== Training XGB ===
+
+=== Training MLP ===
+
+====================================
+CPU Time used: 95:23:53
+CPU Percent: 1983%
+Memory usage: 6462396kb
+Approx Power usage: 1.1446
+Walltime usage: 05:19:36
+
+====================================
